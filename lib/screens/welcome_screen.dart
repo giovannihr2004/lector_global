@@ -3,7 +3,9 @@
 // --------------------------------------------------------------
 
 import 'package:flutter/material.dart';
+import '../main.dart'; // Importamos MyHomePage
 
+/// Widget de pantalla de bienvenida inicial
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
@@ -30,7 +32,14 @@ class WelcomeScreen extends StatelessWidget {
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                // Aquí después navegaremos a la siguiente pantalla
+                // Navegar a la pantalla principal
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder:
+                        (context) =>
+                            const MyHomePage(title: 'Inicio de Lector Global'),
+                  ),
+                );
               },
               child: const Text('Comenzar'),
             ),

@@ -3,7 +3,7 @@
 // ----------------------------------------
 
 import 'package:flutter/material.dart';
-import 'welcome_screen.dart'; // ✅ Importación correcta de la pantalla de bienvenida
+import 'screens/welcome_screen.dart';
 
 void main() {
   runApp(const MyApp());
