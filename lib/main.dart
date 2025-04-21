@@ -1,9 +1,11 @@
-// ----------------------------------------
+// --------------------------------------------------------------
 // Parte 1: Configuración e inicio de la aplicación
-// ----------------------------------------
+// --------------------------------------------------------------
 
 import 'package:flutter/material.dart';
 import 'screens/welcome_screen.dart';
+import 'screens/auth/login_screen.dart';
+import 'screens/auth/register_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,25 +19,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Lector Global',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        /// Esquema de color base para la aplicación
+        // Esquema de color principal de la app
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      home:
-          const WelcomeScreen(), // ✅ Pantalla inicial que se muestra al abrir la app
+      home: const WelcomeScreen(), // Pantalla inicial de la app
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/register': (context) => const RegisterScreen(),
+      },
     );
   }
 }
 
-// -------------------------------------------------------------
-// Parte 2: Declaración del widget principal con estado (Home)
-// -------------------------------------------------------------
+// --------------------------------------------------------------
+// Parte 2: Declaración del widget principal con estado (MyHomePage)
+// --------------------------------------------------------------
 
-/// Pantalla principal que será un widget con estado
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  final String title; // Título mostrado en la barra superior (AppBar)
+  final String title; // Título que se mostrará en el AppBar
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -45,14 +51,13 @@ class MyHomePage extends StatefulWidget {
 // Parte 3: Lógica del estado, contador y estructura visual principal
 // -------------------------------------------------------------------
 
-/// Estado de la pantalla principal con contador y estructura básica
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0; // Contador que se incrementa al presionar el botón flotante
+  int _counter = 0;
 
-  /// Método que incrementa el contador y actualiza la interfaz
+  /// Método para incrementar el contador
   void _incrementCounter() {
     setState(() {
-      _counter++; // Se incrementa el contador
+      _counter++;
     });
   }
 
@@ -60,8 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Center(
         child: Column(
