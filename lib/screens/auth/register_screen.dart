@@ -2,8 +2,8 @@
 // Pantalla de Registro para la aplicación Lector Global
 // Archivo: register_screen.dart
 // Descripción: Permite a los usuarios registrarse mediante nombre, correo y contraseña.
-// Versión: 1.4
-// Fecha: 21/04/2025 - Hora: 22:32 (202504212232)
+// Versión: 1.5
+// Fecha: 22/04/2025 - Hora: 23:05 (202504222305)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -27,13 +27,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
 
-      // Simulación de proceso de registro (puedes reemplazar con lógica Firebase)
+      // Simulación de registro
       Future.delayed(const Duration(seconds: 2), () {
         setState(() => _isLoading = false);
+
+        final name = _nameController.text.trim();
+        final email = _emailController.text.trim();
+
+        print('Usuario registrado: $name - $email');
+
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Usuario registrado exitosamente')),
         );
-        Navigator.pop(context); // Vuelve a la pantalla anterior
+
+        Navigator.pop(context); // Vuelve a la pantalla de login
       });
     }
   }
@@ -63,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   hintText: 'Ingresa tu nombre',
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.trim().isEmpty) {
                     return 'Por favor ingresa tu nombre';
                   }
                   return null;
@@ -79,7 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.trim().isEmpty) {
                     return 'Por favor ingresa tu correo';
                   }
                   if (!value.contains('@') || !value.contains('.')) {
