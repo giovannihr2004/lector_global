@@ -1,14 +1,21 @@
+// -----------------------------------------------------------------------------
+// Archivo: android/app/build.gradle.kts
+// Descripción: Configuración del módulo Android de la app Lector Global
+// Versión: 1.4
+// Fecha: 21/04/2025
+// -----------------------------------------------------------------------------
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    // El plugin de Flutter debe ir después de los de Android y Kotlin
     id("dev.flutter.flutter-gradle-plugin")
 }
 
 android {
     namespace = "com.example.lector_global"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"  // Versión requerida por los plugins de autenticación
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -20,10 +27,7 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.lector_global"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
@@ -32,8 +36,7 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // Usar claves de depuración por ahora
             signingConfig = signingConfigs.getByName("debug")
         }
     }

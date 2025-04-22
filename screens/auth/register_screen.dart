@@ -2,44 +2,22 @@
 // Pantalla de Registro para la aplicación Lector Global
 // Archivo: register_screen.dart
 // Descripción: Permite a los usuarios registrarse mediante nombre, correo y contraseña.
-// Versión: 1.4
-// Fecha: 21/04/2025 - Hora: 22:32 (202504212232)
+// Versión: 1.1
+// Fecha: 20/04/2025 - Hora: 20:13 (202420252013)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  bool _isLoading = false;
-
-  void _registerUser() {
-    if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-
-      // Simulación de proceso de registro (puedes reemplazar con lógica Firebase)
-      Future.delayed(const Duration(seconds: 2), () {
-        setState(() => _isLoading = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Usuario registrado exitosamente')),
-        );
-        Navigator.pop(context); // Vuelve a la pantalla anterior
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Crear cuenta'),
@@ -48,7 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Form(
-          key: _formKey,
+          key: formKey,
 
           // -----------------------------
           // Parte 1: Campos del formulario
@@ -58,7 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               const Text('Nombre completo'),
               TextFormField(
-                controller: _nameController,
+                controller: nameController,
                 decoration: const InputDecoration(
                   hintText: 'Ingresa tu nombre',
                 ),
@@ -73,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
               const Text('Correo electrónico'),
               TextFormField(
-                controller: _emailController,
+                controller: emailController,
                 decoration: const InputDecoration(
                   hintText: 'correo@ejemplo.com',
                 ),
@@ -92,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
               const Text('Contraseña'),
               TextFormField(
-                controller: _passwordController,
+                controller: passwordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   hintText: 'Crea una contraseña',
@@ -111,15 +89,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
               // -----------------------------
               Center(
                 child: ElevatedButton(
-                  onPressed: _isLoading ? null : _registerUser,
-                  child:
-                      _isLoading
-                          ? const SizedBox(
-                            height: 16,
-                            width: 16,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                          : const Text('Registrarse'),
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      // Aquí va la lógica para registrar al usuario
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Registrando usuario...')),
+                      );
+                    }
+                  },
+                  child: const Text('Registrarse'),
                 ),
               ),
             ],
