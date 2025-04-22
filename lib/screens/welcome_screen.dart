@@ -2,8 +2,8 @@
 // Pantalla de bienvenida para la aplicación Lector Global
 // Archivo: welcome_screen.dart
 // Descripción: Pantalla inicial que presenta la app y permite iniciar sesión.
-// Versión: 1.1
-// Fecha: 22/04/2025 - Hora: 23:12 (202504222312)
+// Versión: 1.2
+// Fecha: 22/04/2025 - Hora: 23:45 (202504222345)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -27,7 +27,11 @@ class WelcomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Ícono de bienvenida
-                Icon(Icons.menu_book, size: 100, color: Colors.deepPurple),
+                Icon(
+                  Icons.menu_book_rounded,
+                  size: 100,
+                  color: Colors.deepPurple.shade400,
+                ),
 
                 const SizedBox(height: 30),
 
@@ -35,20 +39,24 @@ class WelcomeScreen extends StatelessWidget {
                 const Text(
                   'Bienvenido a Lector Global',
                   style: TextStyle(
-                    fontSize: 26,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                   textAlign: TextAlign.center,
                 ),
 
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
 
                 // Subtítulo
                 const Text(
                   'Mejora tu comprensión lectora\ncon textos divertidos y desafiantes',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black54,
+                    height: 1.5,
+                  ),
                 ),
 
                 const SizedBox(height: 48),
@@ -67,10 +75,14 @@ class WelcomeScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.deepPurple,
                       padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 3,
                     ),
                     child: const Text(
                       'Comenzar',
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
                 ),
