@@ -1,7 +1,10 @@
-// --------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Pantalla de bienvenida para la aplicación Lector Global
-// Última actualización: 2025-04-20 20:28
-// --------------------------------------------------------------
+// Archivo: welcome_screen.dart
+// Descripción: Pantalla inicial que presenta la app y permite iniciar sesión.
+// Versión: 1.1
+// Fecha: 22/04/2025 - Hora: 23:12 (202504222312)
+// -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
 import 'auth/login_screen.dart'; // Importamos la pantalla de login
@@ -13,42 +16,67 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple[50],
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Ícono de bienvenida
-            Icon(Icons.menu_book, size: 100, color: Colors.deepPurple),
-
-            const SizedBox(height: 20),
-
-            // Título de bienvenida
-            const Text(
-              'Bienvenido a Lector Global',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 32.0,
+              vertical: 48.0,
             ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Ícono de bienvenida
+                Icon(Icons.menu_book, size: 100, color: Colors.deepPurple),
 
-            const SizedBox(height: 10),
+                const SizedBox(height: 30),
 
-            // Subtítulo o descripción
-            const Text(
-              'Mejora tu comprensión lectora\ncon textos divertidos y desafiantes',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
+                // Título
+                const Text(
+                  'Bienvenido a Lector Global',
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+
+                const SizedBox(height: 12),
+
+                // Subtítulo
+                const Text(
+                  'Mejora tu comprensión lectora\ncon textos divertidos y desafiantes',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16),
+                ),
+
+                const SizedBox(height: 48),
+
+                // Botón "Comenzar"
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const LoginScreen(),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepPurple,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child: const Text(
+                      'Comenzar',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                ),
+              ],
             ),
-
-            const SizedBox(height: 40),
-
-            // Botón para comenzar e ir a login
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                );
-              },
-              child: const Text('Comenzar'),
-            ),
-          ],
+          ),
         ),
       ),
     );
