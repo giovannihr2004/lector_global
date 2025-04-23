@@ -1,11 +1,11 @@
 // ---------------------------------------------------------------------
 // Pantalla de inicio de sesión para la aplicación Lector Global
-// Versión 2.0 - Mejora del botón de Google, manejo correcto de ScaffoldMessenger
-// Fecha: 23/04/2025 - 23:58 (202504232358)
+// Versión 2.1 - Corrección de context async, shadowColor y advertencias
+// Fecha: 24/04/2025 - 00:48 (202504240048)
 // ---------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
-import 'package:lector_global/services/google_sign_in_service.dart'; // Importamos el servicio de Google
+import 'package:lector_global/services/google_sign_in_service.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -32,9 +32,10 @@ class _LoginScreenState extends State<LoginScreen> {
       await Future.delayed(const Duration(seconds: 2));
 
       if (!mounted) return;
-      setState(() => _isLoading = false);
 
       final scaffoldMessenger = ScaffoldMessenger.of(context);
+      setState(() => _isLoading = false);
+
       if (email == 'test@lector.com' && password == '123456') {
         scaffoldMessenger.showSnackBar(
           const SnackBar(content: Text('Inicio de sesión exitoso')),
@@ -53,9 +54,10 @@ class _LoginScreenState extends State<LoginScreen> {
     final user = await GoogleSignInService.signInWithGoogle();
 
     if (!mounted) return;
-    setState(() => _isLoading = false);
 
     final scaffoldMessenger = ScaffoldMessenger.of(context);
+    setState(() => _isLoading = false);
+
     if (user != null) {
       scaffoldMessenger.showSnackBar(
         SnackBar(content: Text('Bienvenido, ${user.displayName}!')),
@@ -124,11 +126,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: Colors.black87,
+                      shadowColor: const Color.fromARGB(
+                        102,
+                        158,
+                        158,
+                        158,
+                      ), // Equivalente a grey.withOpacity(0.4)
+                      elevation: 4,
                     ),
-                    icon: Image.asset(
-                      'assets/google_logo.png',
-                      height: 20,
-                    ),
+                    icon: Image.asset('assets/google_logo.png', height: 20),
                     label: const Text('Iniciar sesión con Google'),
                   ),
                   const SizedBox(height: 20),
@@ -173,4 +179,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
