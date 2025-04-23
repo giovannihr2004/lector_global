@@ -1,9 +1,9 @@
 // -----------------------------------------------------------------------------
 // Pantalla de bienvenida para la aplicación Lector Global
 // Archivo: welcome_screen.dart
-// Descripción: Pantalla inicial que presenta la app y permite iniciar sesión.
-// Versión: 1.0.1 - Eslogan oficial actualizado.
-// Fecha: 24/04/2025 - Hora: 20:10 (202504242010)
+// Descripción: Pantalla inicial que presenta la app, con logotipo, autor y eslogan.
+// Versión: 1.0.2 - Logotipo oficial agregado a la pantalla de bienvenida.
+// Fecha: 24/04/2025 - Hora: 20:15 (202504242015)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -26,11 +26,11 @@ class WelcomeScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Ícono de bienvenida
-                Icon(
-                  Icons.menu_book_rounded,
-                  size: 100,
-                  color: Colors.deepPurple.shade400,
+                // Logotipo oficial
+                Image.asset(
+                  'assets/images/logo1.png',
+                  height: 120,
+                  fit: BoxFit.contain,
                 ),
 
                 const SizedBox(height: 30),
