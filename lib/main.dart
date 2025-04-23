@@ -2,22 +2,39 @@
 // Archivo principal de la aplicación Lector Global
 // Archivo: main.dart
 // Descripción: Configura el punto de entrada, tema, navegación inicial y control de sesión.
-// Versión: 1.9
-// Fecha: 24/04/2025 - Hora: 00:07 (202504240007)
+// Versión: 2.0
+// Fecha: 23/04/2025 - Hora: 23:50 (202504232350)
 // -----------------------------------------------------------------------------
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'screens/welcome_screen.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
 import 'screens/dashboard_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Necesario para inicializaciones asincrónicas
-  await Firebase.initializeApp(); // Inicializa Firebase correctamente
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Inicialización de Firebase para web y móviles
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: "AIzaSyBMmGwsJJ7XdhQDO3WZcAr8xOpRzB17k4A",
+        authDomain: "lector-global-27551.firebaseapp.com",
+        projectId: "lector-global-27551",
+        storageBucket: "lector-global-27551.firebasestorage.app",
+        messagingSenderId: "240944008110",
+        appId: "1:240944008110:web:efc9ab5f55e005ab5a563f",
+        measurementId: "G-90VWK701YK",
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
+
   runApp(const MyApp());
 }
 
