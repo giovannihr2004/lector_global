@@ -1,10 +1,11 @@
 // ---------------------------------------------------------------------
 // Pantalla de inicio de sesión para la aplicación Lector Global
-// Versión 1.7 - Animación de carga centrada y coherente visualmente
-// Fecha: 23/04/2025 - 20:38 (202504232038)
+// Versión 1.9 - Corrección de contexto en ScaffoldMessenger y mejoras visuales
+// Fecha: 23/04/2025 - 23:59 (202504232359)
 // ---------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
+import 'package:lector_global/services/google_sign_in_service.dart'; // Importamos el servicio de Google
 import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -22,24 +23,47 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _loginUser() {
     if (_formKey.currentState!.validate()) {
+      final messenger = ScaffoldMessenger.of(context);
+
       setState(() => _isLoading = true);
 
       final email = _emailController.text.trim();
       final password = _passwordController.text;
 
       Future.delayed(const Duration(seconds: 2), () {
+        if (!mounted) return;
         setState(() => _isLoading = false);
 
         if (email == 'test@lector.com' && password == '123456') {
-          ScaffoldMessenger.of(context).showSnackBar(
+          messenger.showSnackBar(
             const SnackBar(content: Text('Inicio de sesión exitoso')),
           );
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
+          messenger.showSnackBar(
             const SnackBar(content: Text('Correo o contraseña incorrectos')),
           );
         }
       });
+    }
+  }
+
+  Future<void> _signInWithGoogle() async {
+    final messenger = ScaffoldMessenger.of(context);
+    setState(() => _isLoading = true);
+
+    final user = await GoogleSignInService.signInWithGoogle();
+
+    if (!mounted) return;
+    setState(() => _isLoading = false);
+
+    if (user != null) {
+      messenger.showSnackBar(
+        SnackBar(content: Text('Bienvenido, ${user.displayName ?? "Usuario"}')),
+      );
+    } else {
+      messenger.showSnackBar(
+        const SnackBar(content: Text('No se pudo iniciar sesión con Google')),
+      );
     }
   }
 
@@ -94,6 +118,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: _isLoading ? null : _loginUser,
                     child: const Text('Ingresar'),
                   ),
+                  const SizedBox(height: 16),
+                  const Text('O inicia sesión con'),
+                  const SizedBox(height: 12),
+                  OutlinedButton.icon(
+                    onPressed: _isLoading ? null : _signInWithGoogle,
+                    icon: Image.asset('assets/google_logo.png', height: 20),
+                    label: const Text('Google'),
+                  ),
                   const SizedBox(height: 20),
                   TextButton(
                     onPressed: () {
@@ -117,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // -------------------------------
         if (_isLoading)
           Container(
-            color: Colors.black.withOpacity(0.4),
+            color: Colors.black.withAlpha((0.4 * 255).toInt()),
             child: const Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
