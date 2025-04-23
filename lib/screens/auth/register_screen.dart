@@ -2,8 +2,8 @@
 // Pantalla de Registro para la aplicación Lector Global
 // Archivo: register_screen.dart
 // Descripción: Permite a los usuarios registrarse mediante nombre, correo y contraseña.
-// Versión: 1.5
-// Fecha: 22/04/2025 - Hora: 23:05 (202504222305)
+// Versión: 1.6
+// Fecha: 23/04/2025 - Hora: 00:43 (202504230043)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -22,12 +22,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   bool _isLoading = false;
+  bool _obscurePassword = true;
 
+  // ------------------------
+  // Función para registrar al usuario
+  // ------------------------
   void _registerUser() {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
 
-      // Simulación de registro
+      // Simulación de proceso de registro
       Future.delayed(const Duration(seconds: 2), () {
         setState(() => _isLoading = false);
 
@@ -40,34 +44,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
           const SnackBar(content: Text('Usuario registrado exitosamente')),
         );
 
-        Navigator.pop(context); // Vuelve a la pantalla de login
+        Navigator.pop(context); // Regresa a la pantalla de inicio de sesión
       });
     }
   }
 
+  // ------------------------
+  // Interfaz de usuario
+  // ------------------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Crear cuenta'),
         backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: Form(
           key: _formKey,
-
-          // -----------------------------
-          // Parte 1: Campos del formulario
-          // -----------------------------
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // -------------------------------
+              // Campo: Nombre completo
+              // -------------------------------
               const Text('Nombre completo'),
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(
                   hintText: 'Ingresa tu nombre',
+                  prefixIcon: Icon(Icons.person_outline),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -78,11 +86,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               const SizedBox(height: 16),
 
+              // -------------------------------
+              // Campo: Correo electrónico
+              // -------------------------------
               const Text('Correo electrónico'),
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
                   hintText: 'correo@ejemplo.com',
+                  prefixIcon: Icon(Icons.email_outlined),
                 ),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
@@ -97,12 +109,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               const SizedBox(height: 16),
 
+              // -------------------------------
+              // Campo: Contraseña
+              // -------------------------------
               const Text('Contraseña'),
               TextFormField(
                 controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
                   hintText: 'Crea una contraseña',
+                  prefixIcon: const Icon(Icons.lock_outline),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
                 ),
                 validator: (value) {
                   if (value == null || value.length < 6) {
@@ -111,22 +139,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 32),
 
-              // -----------------------------
-              // Parte 2: Botón de registro
-              // -----------------------------
+              // -------------------------------
+              // Botón de registro
+              // -------------------------------
               Center(
-                child: ElevatedButton(
-                  onPressed: _isLoading ? null : _registerUser,
-                  child:
-                      _isLoading
-                          ? const SizedBox(
-                            height: 16,
-                            width: 16,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                          : const Text('Registrarse'),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _isLoading ? null : _registerUser,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepPurple,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child:
+                        _isLoading
+                            ? const SizedBox(
+                              height: 16,
+                              width: 16,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Colors.white,
+                              ),
+                            )
+                            : const Text('Registrarse'),
+                  ),
                 ),
               ),
             ],
