@@ -2,8 +2,8 @@
 // Pantalla de bienvenida para la aplicación Lector Global
 // Archivo: welcome_screen.dart
 // Descripción: Pantalla inicial que presenta la app y permite iniciar sesión.
-// Versión: 1.2
-// Fecha: 22/04/2025 - Hora: 23:45 (202504222345)
+// Versión: 1.0.0 - Versión pública. Autor, fecha y título actualizados.
+// Fecha: 23/04/2025 - Hora: 17:10 (202504231710)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -35,9 +35,20 @@ class WelcomeScreen extends StatelessWidget {
 
                 const SizedBox(height: 30),
 
-                // Título
+                // Línea 1 del título
                 const Text(
-                  'Bienvenido a Lector Global',
+                  'Bienvenido a',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+
+                // Línea 2 del título
+                const Text(
+                  'Lector Global',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -59,7 +70,33 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 48),
+                const SizedBox(height: 24),
+
+                // Autor y fecha
+                const Column(
+                  children: [
+                    Text(
+                      'Desarrollado por Jhovani Holguín Rojas',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black45,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      'Versión: 1.0.0',
+                      style: TextStyle(fontSize: 13, color: Colors.black38),
+                    ),
+                    Text(
+                      'Fecha: 23 de abril de 2025',
+                      style: TextStyle(fontSize: 13, color: Colors.black38),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 32),
 
                 // Botón "Comenzar"
                 SizedBox(
