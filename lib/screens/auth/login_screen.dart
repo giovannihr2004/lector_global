@@ -1,11 +1,12 @@
 // ---------------------------------------------------------------------
 // Pantalla de inicio de sesión para la aplicación Lector Global
-// Versión 2.1 - Corrección de context async, shadowColor y advertencias
-// Fecha: 24/04/2025 - 00:48 (202504240048)
+// Versión 2.2 - Correcciones visuales y navegación tras login con Google
+// Fecha: 25/04/2025 - 00:37 (202504250037)
 // ---------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
 import 'package:lector_global/services/google_sign_in_service.dart';
+import 'package:lector_global/screens/dashboard_screen.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -19,7 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
   bool _isLoading = false;
 
   void _loginUser() async {
@@ -32,13 +32,16 @@ class _LoginScreenState extends State<LoginScreen> {
       await Future.delayed(const Duration(seconds: 2));
 
       if (!mounted) return;
-
-      final scaffoldMessenger = ScaffoldMessenger.of(context);
       setState(() => _isLoading = false);
 
+      final scaffoldMessenger = ScaffoldMessenger.of(context);
       if (email == 'test@lector.com' && password == '123456') {
         scaffoldMessenger.showSnackBar(
           const SnackBar(content: Text('Inicio de sesión exitoso')),
+        );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const DashboardScreen()),
         );
       } else {
         scaffoldMessenger.showSnackBar(
@@ -54,13 +57,16 @@ class _LoginScreenState extends State<LoginScreen> {
     final user = await GoogleSignInService.signInWithGoogle();
 
     if (!mounted) return;
-
-    final scaffoldMessenger = ScaffoldMessenger.of(context);
     setState(() => _isLoading = false);
 
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
     if (user != null) {
       scaffoldMessenger.showSnackBar(
         SnackBar(content: Text('Bienvenido, ${user.displayName}!')),
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const DashboardScreen()),
       );
     } else {
       scaffoldMessenger.showSnackBar(
@@ -126,17 +132,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: Colors.black87,
-                      shadowColor: const Color.fromARGB(
-                        102,
-                        158,
-                        158,
-                        158,
-                      ), // Equivalente a grey.withOpacity(0.4)
-                      elevation: 4,
+                      shadowColor: Colors.grey[300],
                     ),
                     icon: Image.asset('assets/google_logo.png', height: 20),
                     label: const Text('Iniciar sesión con Google'),
                   ),
+                  const SizedBox(height: 12),
+                  // Botón de Facebook (opcional, aún no funcional)
+                  // ElevatedButton.icon(
+                  //   onPressed: null,
+                  //   icon: Icon(Icons.facebook, color: Colors.white),
+                  //   label: Text('Iniciar sesión con Facebook'),
+                  //   style: ElevatedButton.styleFrom(
+                  //     backgroundColor: Colors.blue[800],
+                  //     foregroundColor: Colors.white,
+                  //   ),
+                  // ),
                   const SizedBox(height: 20),
                   TextButton(
                     onPressed: () {
@@ -147,7 +158,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
                     },
-                    child: const Text('¿No tienes cuenta? Regístrate aquí'),
+                    child: const Text(
+                      '¿No tienes cuenta? Regístrate aquí',
+                      style: TextStyle(color: Colors.deepPurple),
+                    ),
                   ),
                 ],
               ),
@@ -155,12 +169,10 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
 
-        // -------------------------------
-        // Capa de carga animada (overlay)
-        // -------------------------------
+        // Capa de carga
         if (_isLoading)
           Container(
-            color: Colors.black.withAlpha(102), // 102 = 0.4 * 255
+            color: Colors.black.withAlpha(102),
             child: const Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
