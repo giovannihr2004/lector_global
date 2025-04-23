@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------------
 // Pantalla de inicio de sesión para la aplicación Lector Global
-// Versión 1.9 - Corrección de contexto en ScaffoldMessenger y mejoras visuales
-// Fecha: 23/04/2025 - 23:59 (202504232359)
+// Versión 2.0 - Mejora del botón de Google, manejo correcto de ScaffoldMessenger
+// Fecha: 23/04/2025 - 23:58 (202504232358)
 // ---------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -19,36 +19,35 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   bool _isLoading = false;
 
-  void _loginUser() {
+  void _loginUser() async {
     if (_formKey.currentState!.validate()) {
-      final messenger = ScaffoldMessenger.of(context);
-
       setState(() => _isLoading = true);
 
       final email = _emailController.text.trim();
       final password = _passwordController.text;
 
-      Future.delayed(const Duration(seconds: 2), () {
-        if (!mounted) return;
-        setState(() => _isLoading = false);
+      await Future.delayed(const Duration(seconds: 2));
 
-        if (email == 'test@lector.com' && password == '123456') {
-          messenger.showSnackBar(
-            const SnackBar(content: Text('Inicio de sesión exitoso')),
-          );
-        } else {
-          messenger.showSnackBar(
-            const SnackBar(content: Text('Correo o contraseña incorrectos')),
-          );
-        }
-      });
+      if (!mounted) return;
+      setState(() => _isLoading = false);
+
+      final scaffoldMessenger = ScaffoldMessenger.of(context);
+      if (email == 'test@lector.com' && password == '123456') {
+        scaffoldMessenger.showSnackBar(
+          const SnackBar(content: Text('Inicio de sesión exitoso')),
+        );
+      } else {
+        scaffoldMessenger.showSnackBar(
+          const SnackBar(content: Text('Correo o contraseña incorrectos')),
+        );
+      }
     }
   }
 
-  Future<void> _signInWithGoogle() async {
-    final messenger = ScaffoldMessenger.of(context);
+  Future<void> _loginWithGoogle() async {
     setState(() => _isLoading = true);
 
     final user = await GoogleSignInService.signInWithGoogle();
@@ -56,12 +55,13 @@ class _LoginScreenState extends State<LoginScreen> {
     if (!mounted) return;
     setState(() => _isLoading = false);
 
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
     if (user != null) {
-      messenger.showSnackBar(
-        SnackBar(content: Text('Bienvenido, ${user.displayName ?? "Usuario"}')),
+      scaffoldMessenger.showSnackBar(
+        SnackBar(content: Text('Bienvenido, ${user.displayName}!')),
       );
     } else {
-      messenger.showSnackBar(
+      scaffoldMessenger.showSnackBar(
         const SnackBar(content: Text('No se pudo iniciar sesión con Google')),
       );
     }
@@ -118,13 +118,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: _isLoading ? null : _loginUser,
                     child: const Text('Ingresar'),
                   ),
-                  const SizedBox(height: 16),
-                  const Text('O inicia sesión con'),
                   const SizedBox(height: 12),
-                  OutlinedButton.icon(
-                    onPressed: _isLoading ? null : _signInWithGoogle,
-                    icon: Image.asset('assets/google_logo.png', height: 20),
-                    label: const Text('Google'),
+                  ElevatedButton.icon(
+                    onPressed: _isLoading ? null : _loginWithGoogle,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black87,
+                    ),
+                    icon: Image.asset(
+                      'assets/google_logo.png',
+                      height: 20,
+                    ),
+                    label: const Text('Iniciar sesión con Google'),
                   ),
                   const SizedBox(height: 20),
                   TextButton(
@@ -149,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // -------------------------------
         if (_isLoading)
           Container(
-            color: Colors.black.withAlpha((0.4 * 255).toInt()),
+            color: Colors.black.withAlpha(102), // 102 = 0.4 * 255
             child: const Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -168,3 +173,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
