@@ -1,13 +1,14 @@
-// ---------------------------------------------------------------------
-// Pantalla de inicio de sesión para la aplicación Lector Global
-// Versión 2.2 - Correcciones visuales y navegación tras login con Google
-// Fecha: 25/04/2025 - 00:37 (202504250037)
-// ---------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// Pantalla de inicio de sesión para Lector Global
+// Archivo: login_screen.dart
+// Descripción: Formulario de autenticación con correo, Google y Facebook.
+// Versión: 1.1.0 - Incluye logotipo, eslogan, mejoras visuales y estructura profesional.
+// Fecha: 24/04/2025 - Hora: 20:45 (202504242045)
+// -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
-import 'package:lector_global/services/google_sign_in_service.dart';
-import 'package:lector_global/screens/dashboard_screen.dart';
 import 'register_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,177 +18,163 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  bool _isLoading = false;
-
-  void _loginUser() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-
-      final email = _emailController.text.trim();
-      final password = _passwordController.text;
-
-      await Future.delayed(const Duration(seconds: 2));
-
-      if (!mounted) return;
-      setState(() => _isLoading = false);
-
-      final scaffoldMessenger = ScaffoldMessenger.of(context);
-      if (email == 'test@lector.com' && password == '123456') {
-        scaffoldMessenger.showSnackBar(
-          const SnackBar(content: Text('Inicio de sesión exitoso')),
-        );
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const DashboardScreen()),
-        );
-      } else {
-        scaffoldMessenger.showSnackBar(
-          const SnackBar(content: Text('Correo o contraseña incorrectos')),
-        );
-      }
-    }
-  }
-
-  Future<void> _loginWithGoogle() async {
-    setState(() => _isLoading = true);
-
-    final user = await GoogleSignInService.signInWithGoogle();
-
-    if (!mounted) return;
-    setState(() => _isLoading = false);
-
-    final scaffoldMessenger = ScaffoldMessenger.of(context);
-    if (user != null) {
-      scaffoldMessenger.showSnackBar(
-        SnackBar(content: Text('Bienvenido, ${user.displayName}!')),
-      );
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const DashboardScreen()),
-      );
-    } else {
-      scaffoldMessenger.showSnackBar(
-        const SnackBar(content: Text('No se pudo iniciar sesión con Google')),
-      );
-    }
-  }
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Scaffold(
-          backgroundColor: Colors.deepPurple[50],
-          appBar: AppBar(
-            title: const Text('Iniciar sesión'),
-            backgroundColor: Colors.deepPurple,
-            foregroundColor: Colors.white,
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'Correo electrónico',
+    return Scaffold(
+      backgroundColor: Colors.deepPurple[50],
+      appBar: AppBar(
+        title: const Text('Iniciar sesión'),
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
+        elevation: 0,
+      ),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Logotipo oficial
+                Image.asset('assets/images/logo1.png', height: 100),
+                const SizedBox(height: 12),
+
+                // Eslogan
+                const Text(
+                  'El viaje comienza con una página.',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.deepPurple,
+                  ),
+                ),
+                const SizedBox(height: 32),
+
+                // Campo correo
+                TextField(
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    labelText: 'Correo electrónico, teléfono o usuario',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Campo contraseña con ícono de visibilidad
+                TextField(
+                  controller: passwordController,
+                  obscureText: obscurePassword,
+                  decoration: InputDecoration(
+                    labelText: 'Contraseña',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        obscurePassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          obscurePassword = !obscurePassword;
+                        });
+                      },
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor ingresa tu correo';
-                      }
-                      if (!value.contains('@') || !value.contains('.')) {
-                        return 'Correo no válido';
-                      }
-                      return null;
-                    },
                   ),
-                  const SizedBox(height: 12),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: const InputDecoration(labelText: 'Contraseña'),
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.length < 6) {
-                        return 'Debe tener al menos 6 caracteres';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 24),
-                  ElevatedButton(
-                    onPressed: _isLoading ? null : _loginUser,
+                ),
+
+                const SizedBox(height: 24),
+
+                // Botón de ingresar
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepPurple,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
                     child: const Text('Ingresar'),
                   ),
-                  const SizedBox(height: 12),
-                  ElevatedButton.icon(
-                    onPressed: _isLoading ? null : _loginWithGoogle,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.black87,
-                      shadowColor: Colors.grey[300],
+                ),
+
+                const SizedBox(height: 16),
+
+                // Botón Google
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    icon: Image.asset('assets/images/google.png', height: 20),
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
-                    icon: Image.asset('assets/google_logo.png', height: 20),
-                    label: const Text('Iniciar sesión con Google'),
-                  ),
-                  const SizedBox(height: 12),
-                  // Botón de Facebook (opcional, aún no funcional)
-                  // ElevatedButton.icon(
-                  //   onPressed: null,
-                  //   icon: Icon(Icons.facebook, color: Colors.white),
-                  //   label: Text('Iniciar sesión con Facebook'),
-                  //   style: ElevatedButton.styleFrom(
-                  //     backgroundColor: Colors.blue[800],
-                  //     foregroundColor: Colors.white,
-                  //   ),
-                  // ),
-                  const SizedBox(height: 20),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RegisterScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      '¿No tienes cuenta? Regístrate aquí',
-                      style: TextStyle(color: Colors.deepPurple),
+                    label: const Text(
+                      'Google',
+                      style: TextStyle(color: Colors.black87),
                     ),
                   ),
-                ],
-              ),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Botón Facebook
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    icon: Image.asset('assets/images/facebook.png', height: 20),
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    label: const Text(
+                      'Facebook',
+                      style: TextStyle(color: Colors.black87),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // Enlace a registro
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    '¿No tienes cuenta? Regístrate aquí',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.deepPurple,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // Pie de página
+                const Text(
+                  'Al registrarte en Lector Global, aceptas nuestros Términos y Política de privacidad.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 12, color: Colors.black45),
+                ),
+              ],
             ),
           ),
         ),
-
-        // Capa de carga
-        if (_isLoading)
-          Container(
-            color: Colors.black.withAlpha(102),
-            child: const Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CircularProgressIndicator(color: Colors.white),
-                  SizedBox(height: 16),
-                  Text(
-                    'Iniciando sesión...',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-          ),
-      ],
+      ),
     );
   }
 }
