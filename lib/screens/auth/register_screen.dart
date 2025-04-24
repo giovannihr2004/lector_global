@@ -2,11 +2,12 @@
 // Pantalla de Registro para la aplicación Lector Global
 // Archivo: register_screen.dart
 // Descripción: Permite a los usuarios registrarse mediante nombre, correo y contraseña.
-// Versión: 1.6
-// Fecha: 23/04/2025 - Hora: 00:43 (202504230043)
+// Versión: 1.7 - Redirección a pantalla de éxito luego del registro
+// Fecha: 25/04/2025 - Hora: 23:58 (202504252358)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
+import 'success_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -31,7 +32,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
 
-      // Simulación de proceso de registro
       Future.delayed(const Duration(seconds: 2), () {
         setState(() => _isLoading = false);
 
@@ -40,11 +40,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         print('Usuario registrado: $name - $email');
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Usuario registrado exitosamente')),
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const SuccessScreen()),
         );
-
-        Navigator.pop(context); // Regresa a la pantalla de inicio de sesión
       });
     }
   }
@@ -67,9 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // -------------------------------
               // Campo: Nombre completo
-              // -------------------------------
               const Text('Nombre completo'),
               TextFormField(
                 controller: _nameController,
@@ -86,9 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               const SizedBox(height: 16),
 
-              // -------------------------------
               // Campo: Correo electrónico
-              // -------------------------------
               const Text('Correo electrónico'),
               TextFormField(
                 controller: _emailController,
@@ -109,9 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               const SizedBox(height: 16),
 
-              // -------------------------------
               // Campo: Contraseña
-              // -------------------------------
               const Text('Contraseña'),
               TextFormField(
                 controller: _passwordController,
@@ -141,9 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               const SizedBox(height: 32),
 
-              // -------------------------------
               // Botón de registro
-              // -------------------------------
               Center(
                 child: SizedBox(
                   width: double.infinity,
