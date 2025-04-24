@@ -35,6 +35,9 @@ dependencies:
   # Plugin para compartir datos entre plataformas
   plugin_platform_interface: ^2.1.8
 
+  # SVG para íconos vectoriales como el de Google o Facebook (necesario para algunas interfaces)
+  flutter_svg: ^2.0.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -47,3 +50,4 @@ flutter:
 
   assets:
     - assets/
+    - assets/images/

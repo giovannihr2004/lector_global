@@ -1,21 +1,20 @@
 // -----------------------------------------------------------------------------
 // Archivo: android/app/build.gradle.kts
-// Descripción: Configuración del módulo Android de la app Lector Global
-// Versión: 1.4
-// Fecha: 21/04/2025
+// Descripción: Configuración del módulo de la app para Android con soporte Firebase
+// Última actualización: 24/04/2025
 // -----------------------------------------------------------------------------
 
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    // El plugin de Flutter debe ir después de los de Android y Kotlin
+    // El plugin de Flutter debe ir después del de Android y Kotlin
     id("dev.flutter.flutter-gradle-plugin")
 }
 
 android {
     namespace = "com.example.lector_global"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.0.12077973"  // Versión requerida por los plugins de autenticación
+    ndkVersion = "27.0.12077973" // ✅ Versión requerida por Firebase y plugins
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -27,7 +26,8 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.lector_global"
+        // ✅ Este ID debe coincidir con el de Firebase (google-services.json)
+        applicationId = "android.lector.global"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
@@ -36,7 +36,7 @@ android {
 
     buildTypes {
         release {
-            // Usar claves de depuración por ahora
+            // Firma con la clave de debug por ahora para facilitar pruebas
             signingConfig = signingConfigs.getByName("debug")
         }
     }
@@ -45,3 +45,8 @@ android {
 flutter {
     source = "../.."
 }
+
+// -----------------------------------------------------------------------------
+// Plugin de Google Services necesario para Firebase Auth, Analytics, etc.
+// -----------------------------------------------------------------------------
+apply(plugin = "com.google.gms.google-services")

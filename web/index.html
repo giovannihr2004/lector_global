@@ -1,38 +1,52 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+  <head>
+    <base href="$FLUTTER_BASE_HREF" />
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta
+      name="description"
+      content="Lector Global - Mejora tu comprensión lectora."
+    />
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    <!-- iOS meta tags & icons -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Lector Global" />
+    <link rel="apple-touch-icon" href="icons/Icon-192.png" />
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png" />
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+    <title>Lector Global</title>
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <!-- Activar pantalla completa automáticamente al cargar -->
+    <script src="fullscreen.js" defer></script>
 
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="lector_global">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js"></script>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyBMmGwsJJ7XdhQDO3WZcAr8xOpRzB17k4A",
+        authDomain: "lector-global-27551.firebaseapp.com",
+        projectId: "lector-global-27551",
+        storageBucket: "lector-global-27551.firebasestorage.app",
+        messagingSenderId: "240944008110",
+        appId: "1:240944008110:web:efc9ab5f55e005ab5a563f",
+        measurementId: "G-90VWK701YK",
+      };
 
-  <title>lector_global</title>
-  <link rel="manifest" href="manifest.json">
-</head>
-<body>
-  <script src="flutter_bootstrap.js" async></script>
-</body>
+      const app = firebase.initializeApp(firebaseConfig);
+      const analytics = firebase.analytics(app);
+    </script>
+
+    <!-- Bootstrap Flutter app -->
+    <script src="flutter_bootstrap.js" async></script>
+  </body>
 </html>
