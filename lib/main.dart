@@ -2,7 +2,7 @@
 // Archivo principal de la aplicación Lector Global
 // Archivo: main.dart
 // Descripción: Configura el punto de entrada, tema, navegación inicial y control de sesión.
-// Versión: 2.0
+// Versión: 2.0 intefaz funcional el dia 270420251934
 // Fecha: 23/04/2025 - Hora: 23:50 (202504232350)
 // -----------------------------------------------------------------------------
 
@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_localizations/flutter_localizations.dart'; // Importar para localización
 import 'screens/welcome_screen.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
@@ -51,6 +52,23 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      supportedLocales: [
+        Locale('es', ''), // Español
+        Locale('en', ''), // Inglés
+        Locale('fr', ''), // Francés
+        Locale('it', ''), // Italiano
+        Locale('pt', ''), // Portugués
+        Locale('de', ''), // Alemán
+        Locale('ru', ''), // Ruso
+        Locale('ja', ''), // Japonés
+        Locale('zh', ''), // Chino
+        Locale('ar', ''), // Árabe
+      ],
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       home: const RootScreen(), // Control de navegación inicial
       routes: {
         '/login': (context) => const LoginScreen(),
@@ -79,6 +97,37 @@ class RootScreen extends StatelessWidget {
         } else {
           return const WelcomeScreen();
         }
+      },
+    );
+  }
+}
+
+/// Selector de idioma para cambiar entre los idiomas configurados
+class LanguageSelector extends StatefulWidget {
+  const LanguageSelector({Key? key}) : super(key: key);
+
+  @override
+  _LanguageSelectorState createState() => _LanguageSelectorState();
+}
+
+class _LanguageSelectorState extends State<LanguageSelector> {
+  Locale _selectedLanguage = Locale('es', '');
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<Locale>(
+      value: _selectedLanguage,
+      items: [
+        DropdownMenuItem(value: Locale('es', ''), child: Text('Español')),
+        DropdownMenuItem(value: Locale('en', ''), child: Text('English')),
+        DropdownMenuItem(value: Locale('fr', ''), child: Text('Français')),
+        // Agrega más idiomas aquí
+      ],
+      onChanged: (Locale? newLanguage) {
+        setState(() {
+          _selectedLanguage = newLanguage!;
+        });
+        // Aquí deberíamos actualizar la localización de la aplicación
       },
     );
   }
