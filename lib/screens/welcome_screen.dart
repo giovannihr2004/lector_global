@@ -2,12 +2,15 @@
 // Pantalla de bienvenida para la aplicación Lector Global
 // Archivo: welcome_screen.dart
 // Descripción: Pantalla inicial que presenta la app, con logotipo, autor y eslogan.
-// Versión: 1.0.2 - Logotipo oficial agregado a la pantalla de bienvenida.
-// Fecha: 24/04/2025 - Hora: 20:15 (202504242015)
+// Versión: 1.0.3 - Corrección de importación de LanguageProvider y LanguageSelector
+// Fecha de última actualización: 27/04/2025 - 20:45 (Hora de Colombia)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
 import 'auth/login_screen.dart'; // Importamos la pantalla de login
+import 'package:provider/provider.dart'; // Para usar el LanguageProvider
+import '../language_provider.dart'; // Importamos el LanguageProvider
+import '../widgets/language_selector.dart'; // Importamos el selector de idioma
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -16,6 +19,15 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple[50],
+      appBar: AppBar(
+        title: const Text('Bienvenido a Lector Global'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: LanguageSelector(), // Selector de idioma en el AppBar
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -59,16 +71,21 @@ class WelcomeScreen extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // Eslogan oficial
-                const Text(
-                  'El viaje comienza con una página.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.deepPurple,
-                    height: 1.5,
-                  ),
+                // Eslogan oficial (usando traducción)
+                Consumer<LanguageProvider>(
+                  builder: (context, languageProvider, child) {
+                    return Text(
+                      languageProvider.localizations.translate('description') ??
+                          'El viaje comienza con una página.',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.deepPurple,
+                        height: 1.5,
+                      ),
+                    );
+                  },
                 ),
 
                 const SizedBox(height: 24),

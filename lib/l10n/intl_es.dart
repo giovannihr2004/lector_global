@@ -1,11 +1,15 @@
-class AppLocalizations {
-  static const _localizedValues = <String, String>{
-    'welcome': 'Bienvenido a Lector Global',
-    'start_button': 'Comenzar',
-    'description': 'El viaje comienza con una página',
-  };
+// 📅 Última actualización: 28/04/2025 - 20:45 (hora Colombia)
+// Traducción al español para Lector Global
 
-  String? translate(String key) {
-    return _localizedValues[key];
-  }
+import '../app_localizations.dart'; // corregimos la ruta
+
+class AppLocalizationsEs extends AppLocalizations {
+  @override
+  String get welcome => 'Bienvenido a Lector Global';
+
+  @override
+  String get startButton => 'Comenzar';
+
+  @override
+  String get description => 'El viaje comienza con una página';
 }
