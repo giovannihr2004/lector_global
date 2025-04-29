@@ -1,5 +1,5 @@
 // 📅 Última actualización: 29/04/2025 - 00:15 (Hora de Colombia)
-// Widget: Selector de Idioma para Lector Global - Sin idioma coreano ('ko')
+// Widget: Selector de Idioma para Lector Global
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
