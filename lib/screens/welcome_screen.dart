@@ -2,8 +2,8 @@
 // Pantalla de bienvenida para la aplicación Lector Global
 // Archivo: welcome_screen.dart
 // Descripción: Pantalla inicial que presenta la app, con logotipo, autor y eslogan.
-// Versión: 1.0.3 - Corrección de importación de LanguageProvider y LanguageSelector
-// Fecha de última actualización: 27/04/2025 - 20:45 (Hora de Colombia)
+// Versión: 1.0.4 - Integración completa de traducción dinámica
+// Fecha de última actualización: 28/04/2025 - 22:15 (Hora de Colombia)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -11,6 +11,7 @@ import 'auth/login_screen.dart'; // Importamos la pantalla de login
 import 'package:provider/provider.dart'; // Para usar el LanguageProvider
 import '../language_provider.dart'; // Importamos el LanguageProvider
 import '../widgets/language_selector.dart'; // Importamos el selector de idioma
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Importamos las traducciones
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -20,10 +21,10 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.deepPurple[50],
       appBar: AppBar(
-        title: const Text('Bienvenido a Lector Global'),
-        actions: [
+        title: Text(AppLocalizations.of(context)!.welcome_title),
+        actions: const [
           Padding(
-            padding: const EdgeInsets.only(right: 20),
+            padding: EdgeInsets.only(right: 20),
             child: LanguageSelector(), // Selector de idioma en el AppBar
           ),
         ],
@@ -47,21 +48,10 @@ class WelcomeScreen extends StatelessWidget {
 
                 const SizedBox(height: 30),
 
-                // Línea 1 del título
-                const Text(
-                  'Bienvenido a',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-
-                // Línea 2 del título
-                const Text(
-                  'Lector Global',
-                  style: TextStyle(
+                // Título principal
+                Text(
+                  AppLocalizations.of(context)!.welcome_title,
+                  style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
@@ -71,45 +61,40 @@ class WelcomeScreen extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // Eslogan oficial (usando traducción)
-                Consumer<LanguageProvider>(
-                  builder: (context, languageProvider, child) {
-                    return Text(
-                      languageProvider.localizations.translate('description') ??
-                          'El viaje comienza con una página.',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.deepPurple,
-                        height: 1.5,
-                      ),
-                    );
-                  },
+                // Eslogan oficial
+                Text(
+                  AppLocalizations.of(context)!.welcome_message,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.deepPurple,
+                    height: 1.5,
+                  ),
                 ),
 
                 const SizedBox(height: 24),
 
                 // Autor y fecha
-                const Column(
+                Column(
                   children: [
                     Text(
-                      'Desarrollado por Jhovani Holguín Rojas',
-                      style: TextStyle(
+                      AppLocalizations.of(context)!.developed_by,
+                      style: const TextStyle(
                         fontSize: 14,
                         fontStyle: FontStyle.italic,
                         color: Colors.black45,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
-                      'Versión: 1.0.0',
-                      style: TextStyle(fontSize: 13, color: Colors.black38),
+                      AppLocalizations.of(context)!.version_info,
+                      style: const TextStyle(fontSize: 13, color: Colors.black38),
                     ),
                     Text(
-                      'Fecha: 23 de abril de 2025',
-                      style: TextStyle(fontSize: 13, color: Colors.black38),
+                      AppLocalizations.of(context)!.date_info,
+                      style: const TextStyle(fontSize: 13, color: Colors.black38),
                     ),
                   ],
                 ),
@@ -135,9 +120,9 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       elevation: 3,
                     ),
-                    child: const Text(
-                      'Comenzar',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    child: Text(
+                      AppLocalizations.of(context)!.start_button,
+                      style: const TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
                 ),

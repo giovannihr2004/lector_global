@@ -1,10 +1,8 @@
 name: lector_global
 description: "Aplicación para mejorar la comprensión lectora en todos los idiomas."
 
-# Evita que este paquete sea publicado accidentalmente en pub.dev
 publish_to: "none"
 
-# Versión de la aplicación: versión.principal . versión.menor . parche + número de compilación
 version: 1.0.0+1
 
 environment:
@@ -17,43 +15,35 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  intl: ^0.19.0 # Actualización de la versión de intl
+  intl: ^0.19.0
 
-  provider: ^6.0.0 # Dependencia agregada para el manejo de estado
+  provider: ^6.0.0
 
-  # Iconos estilo iOS
   cupertino_icons: ^1.0.8
 
-  # Reproducción de sonidos
   audioplayers: ^6.4.0
 
-  # Firebase Core: Requerido para usar Firebase
   firebase_core: ^2.30.0
 
-  # Firebase Auth: Autenticación con correo, Google, Facebook, etc.
   firebase_auth: ^4.17.5
 
-  # Google Sign-In
   google_sign_in: ^6.3.0
 
-  # Facebook Auth
   flutter_facebook_auth: ^6.1.1
 
-  # Plugin para compartir datos entre plataformas
   plugin_platform_interface: ^2.1.8
 
-  # SVG para íconos vectoriales como el de Google o Facebook (necesario para algunas interfaces)
   flutter_svg: ^2.0.7
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # Reglas de buenas prácticas de código recomendadas por Flutter
   flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/
