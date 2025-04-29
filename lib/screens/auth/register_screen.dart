@@ -1,123 +1,129 @@
 // -----------------------------------------------------------------------------
-// Pantalla de Registro para la aplicación Lector Global
-// Archivo: register_screen.dart
-// Descripción: Permite a los usuarios registrarse mediante nombre, correo y contraseña.
-// Versión: 1.6
-// Fecha: 23/04/2025 - Hora: 00:43 (202504230043)
+// 📄 Archivo: register_screen.dart
+// 📍 Ubicación: lib/screens/auth/register_screen.dart
+// 📝 Descripción: Pantalla de registro con validaciones visuales profesionales
+// 📅 Última actualización: 29/04/2025 - 17:13 (GMT-5)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+
+  // Controladores de los campos
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  bool _isLoading = false;
+  // Mostrar u ocultar contraseña
   bool _obscurePassword = true;
 
-  // ------------------------
-  // Función para registrar al usuario
-  // ------------------------
-  void _registerUser() {
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  // Validación de email con expresión regular
+  String? _validateEmail(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'El correo es obligatorio';
+    }
+    final emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
+    if (!emailRegex.hasMatch(value.trim())) {
+      return 'Formato de correo inválido';
+    }
+    return null;
+  }
+
+  // Validación de contraseña
+  String? _validatePassword(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'La contraseña es obligatoria';
+    }
+    if (value.trim().length < 6) {
+      return 'Debe tener al menos 6 caracteres';
+    }
+    return null;
+  }
+
+  // Validación de nombre
+  String? _validateName(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'El nombre es obligatorio';
+    }
+    return null;
+  }
+
+  void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-
-      // Simulación de proceso de registro
-      Future.delayed(const Duration(seconds: 2), () {
-        setState(() => _isLoading = false);
-
-        final name = _nameController.text.trim();
-        final email = _emailController.text.trim();
-
-        print('Usuario registrado: $name - $email');
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Usuario registrado exitosamente')),
-        );
-
-        Navigator.pop(context); // Regresa a la pantalla de inicio de sesión
-      });
+      // TODO: Procesar el registro aquí (Firebase, etc.)
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Registro enviado correctamente')),
+      );
     }
   }
 
-  // ------------------------
-  // Interfaz de usuario
-  // ------------------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Crear cuenta'),
-        backgroundColor: Colors.deepPurple,
-        foregroundColor: Colors.white,
-      ),
+      appBar: AppBar(title: const Text('Registro')),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24),
         child: Form(
           key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // -------------------------------
-              // Campo: Nombre completo
-              // -------------------------------
-              const Text('Nombre completo'),
+              const Text(
+                'Crear cuenta',
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 32),
+
+              // Campo: Nombre
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(
-                  hintText: 'Ingresa tu nombre',
+                  labelText: 'Nombre completo',
+                  border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.person_outline),
                 ),
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Por favor ingresa tu nombre';
-                  }
-                  return null;
-                },
+                validator: _validateName,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
 
-              // -------------------------------
-              // Campo: Correo electrónico
-              // -------------------------------
-              const Text('Correo electrónico'),
+              // Campo: Email
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
-                  hintText: 'correo@ejemplo.com',
+                  labelText: 'Correo electrónico',
+                  border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.email_outlined),
                 ),
                 keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Por favor ingresa tu correo';
-                  }
-                  if (!value.contains('@') || !value.contains('.')) {
-                    return 'Correo no válido';
-                  }
-                  return null;
-                },
+                validator: _validateEmail,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
 
-              // -------------------------------
               // Campo: Contraseña
-              // -------------------------------
-              const Text('Contraseña'),
               TextFormField(
                 controller: _passwordController,
                 obscureText: _obscurePassword,
                 decoration: InputDecoration(
-                  hintText: 'Crea una contraseña',
+                  labelText: 'Contraseña',
+                  border: const OutlineInputBorder(),
                   prefixIcon: const Icon(Icons.lock_outline),
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -132,39 +138,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                   ),
                 ),
-                validator: (value) {
-                  if (value == null || value.length < 6) {
-                    return 'Debe tener al menos 6 caracteres';
-                  }
-                  return null;
-                },
+                validator: _validatePassword,
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 30),
 
-              // -------------------------------
               // Botón de registro
-              // -------------------------------
-              Center(
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _isLoading ? null : _registerUser,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurple,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                    child:
-                        _isLoading
-                            ? const SizedBox(
-                              height: 16,
-                              width: 16,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: Colors.white,
-                              ),
-                            )
-                            : const Text('Registrarse'),
-                  ),
+              ElevatedButton(
+                onPressed: _submitForm,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                child: const Text(
+                  'Registrarse',
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
             ],
