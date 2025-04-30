@@ -14,5 +14,22 @@
   "lessons": "Lecciones",
   "lessonsComingSoon": "Sección de lecciones próximamente",
   "myProgress": "Mi progreso",
-  "progressComingSoon": "Sección de progreso próximamente"
+  "progressComingSoon": "Sección de progreso próximamente",
+
+  "completeAllFields": "Por favor completa todos los campos.",
+  "userNotFound": "Usuario no encontrado.",
+  "incorrectPassword": "Contraseña incorrecta.",
+  "invalidEmail": "Correo electrónico inválido.",
+  "loginError": "Error al iniciar sesión",
+  "unexpectedError": "Error inesperado",
+  "loginTitle": "Iniciar sesión",
+  "loginSubtitle": "Accede con tu cuenta",
+  "emailLabel": "Correo electrónico",
+  "passwordLabel": "Contraseña",
+  "loginButton": "Ingresar",
+  "googleSignIn": "Iniciar con Google",
+  "facebookSignIn": "Iniciar con Facebook",
+  "noAccount": "¿No tienes cuenta?",
+  "registerHere": "Regístrate aquí",
+  "termsAndPrivacy": "Aceptas nuestros términos y política de privacidad"
 }
