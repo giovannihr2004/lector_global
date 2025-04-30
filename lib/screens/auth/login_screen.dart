@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // 📄 Archivo: login_screen.dart
-// 📝 Descripción: Pantalla de login con mensajes de error específicos e invitación a recuperación
-// 📅 Última actualización: 30/04/2025 - 18:30 (GMT-5)
+// 📝 Descripción: Pantalla de login con detección de conexión funcional en Web
+// 📅 Última actualización: 30/04/2025 - 20:50 (GMT-5)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../widgets/language_selector.dart';
 import 'register_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -36,6 +37,13 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = true);
 
     try {
+      final response = await http.get(Uri.parse('https://www.google.com'));
+      if (response.statusCode != 200) {
+        _showError("No hay conexión a Internet. Verifica tu red.");
+        setState(() => _isLoading = false);
+        return;
+      }
+
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
@@ -52,10 +60,9 @@ class _LoginScreenState extends State<LoginScreen> {
       } else {
         mensaje = loc.loginError;
       }
-
       _showError(mensaje);
     } catch (e) {
-      _showError('${loc.unexpectedError}: $e');
+      _showError("No hay conexión a Internet. Verifica tu red.");
     } finally {
       setState(() => _isLoading = false);
     }
