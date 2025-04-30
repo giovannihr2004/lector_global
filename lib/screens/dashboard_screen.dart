@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // 📄 Archivo: dashboard_screen.dart
-// 📝 Descripción: Pantalla principal con saludo y botón de cerrar sesión.
-// 📅 Última actualización: 29/04/2025 - 22:35 (GMT-5)
+// 📝 Descripción: Pantalla principal con logout y botones accesibles
+// 📅 Última actualización: 29/04/2025 - 23:55 (GMT-5)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -18,15 +18,17 @@ class DashboardScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Panel principal'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            tooltip: 'Cerrar sesión',
+          TextButton.icon(
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
               Navigator.pushReplacementNamed(context, '/login');
             },
+            icon: const Icon(Icons.logout, color: Colors.white),
+            label: const Text('Salir', style: TextStyle(color: Colors.white)),
           ),
         ],
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
       ),
       body: Center(
         child: Column(
@@ -43,21 +45,31 @@ class DashboardScreen extends StatelessWidget {
               style: TextStyle(fontSize: 14, color: Colors.black54),
             ),
             const SizedBox(height: 32),
+
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                // Acción futura
+              },
               icon: const Icon(Icons.menu_book),
               label: const Text('Lecciones'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepPurple,
+                foregroundColor: Colors.white,
+                minimumSize: const Size(180, 48),
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
+
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                // Acción futura
+              },
               icon: const Icon(Icons.show_chart),
               label: const Text('Mi progreso'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepPurple,
+                foregroundColor: Colors.white,
+                minimumSize: const Size(180, 48),
               ),
             ),
           ],
