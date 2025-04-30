@@ -1,8 +1,7 @@
 // -----------------------------------------------------------------------------
 // 📄 Archivo: login_screen.dart
-// 📍 Ubicación: lib/screens/auth/login_screen.dart
-// 📝 Descripción: Pantalla de inicio de sesión elegante, funcional y accesible.
-// 📅 Última actualización: 29/04/2025 - 21:40 (GMT-5)
+// 📝 Descripción: Pantalla de inicio de sesión con mensajes claros y accesibles.
+// 📅 Última actualización: 30/04/2025 - 00:09 (GMT-5)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -40,10 +39,33 @@ class _LoginScreenState extends State<LoginScreen> {
         password: password,
       );
       Navigator.pushReplacementNamed(context, '/dashboard');
+    } on FirebaseAuthException catch (e) {
+      String mensaje;
+      switch (e.code) {
+        case 'user-not-found':
+          mensaje = 'El correo ingresado no está registrado.';
+          break;
+        case 'wrong-password':
+        case 'invalid-credential': // ← importante para Web
+          mensaje = 'La contraseña es incorrecta.';
+          break;
+        case 'invalid-email':
+          mensaje = 'El correo tiene un formato inválido.';
+          break;
+        default:
+          mensaje = 'Error al iniciar sesión. Intenta nuevamente.';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(mensaje), backgroundColor: Colors.red),
+      );
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Error al iniciar sesión: $e')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error inesperado: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
@@ -58,7 +80,6 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             const SizedBox(height: 24),
 
-            // Logo central
             SizedBox(
               height: 120,
               child: Image.asset("assets/images/logo1.png"),
