@@ -1,112 +1,110 @@
 // -----------------------------------------------------------------------------
-// Pantalla principal (Dashboard) para la aplicación Lector Global
-// Archivo: dashboard_screen.dart
-// Descripción: Muestra el menú principal una vez el usuario ha iniciado sesión.
-// Versión: 1.0
-// Fecha: 23/04/2025 - Hora: 20:56 (202504232056)
+// 📄 Archivo: dashboard_screen.dart
+// 📍 Ubicación: lib/screens/dashboard_screen.dart
+// 📝 Descripción: Pantalla principal con saludo personalizado y logout real.
+// 📅 Última actualización: 29/04/2025 - 17:49 (GMT-5)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Para traducciones
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Obtener el usuario actual
+    final user = FirebaseAuth.instance.currentUser;
+    final String userEmail = user?.email ?? 'Usuario';
+
+    // Acceso a traducciones
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Panel principal'),
+        title: Text(localizations.dashboardTitle),
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+            tooltip: localizations.logout,
+            icon: const Icon(Icons.logout),
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              // Espera a que la sesión se cierre y luego redirige al login
+              Future.delayed(Duration.zero, () {
+                Navigator.pushReplacementNamed(context, '/login');
+              });
+            },
+          ),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // -------------------------------
-            // Título de bienvenida al usuario
-            // -------------------------------
-            const Text(
-              '¡Bienvenido a Lector Global!',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Saludo personalizado
+              Text(
+                '${localizations.welcome}, $userEmail',
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
 
-            const SizedBox(height: 12),
+              const SizedBox(height: 16),
 
-            const Text(
-              'Selecciona una opción para comenzar:',
-              style: TextStyle(fontSize: 16),
-            ),
+              Text(
+                localizations.startYourReadingJourney,
+                style: const TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
 
-            const SizedBox(height: 32),
+              const SizedBox(height: 40),
 
-            // -------------------------------
-            // Botones de navegación inicial
-            // -------------------------------
-
-            // Ejemplo: Lecciones
-            ElevatedButton.icon(
-              onPressed: () {
-                // Navegar a la sección de lecciones (más adelante)
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Sección de lecciones próximamente'),
+              // Botón: Lecciones
+              ElevatedButton.icon(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(localizations.lessonsComingSoon)),
+                  );
+                },
+                icon: const Icon(Icons.menu_book),
+                label: Text(localizations.lessons),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 24,
                   ),
-                );
-              },
-              icon: const Icon(Icons.menu_book),
-              label: const Text('Lecciones'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 16,
-                  horizontal: 24,
                 ),
               ),
-            ),
 
-            const SizedBox(height: 16),
+              const SizedBox(height: 20),
 
-            // Ejemplo: Progreso
-            ElevatedButton.icon(
-              onPressed: () {
-                // Navegar a la sección de progreso (más adelante)
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Sección de progreso próximamente'),
+              // Botón: Progreso
+              ElevatedButton.icon(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(localizations.progressComingSoon)),
+                  );
+                },
+                icon: const Icon(Icons.show_chart),
+                label: Text(localizations.myProgress),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 24,
                   ),
-                );
-              },
-              icon: const Icon(Icons.show_chart),
-              label: const Text('Mi progreso'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 16,
-                  horizontal: 24,
                 ),
               ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // Ejemplo: Cerrar sesión
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pop(context); // Volver al login
-              },
-              icon: const Icon(Icons.logout),
-              label: const Text('Cerrar sesión'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.redAccent,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 16,
-                  horizontal: 24,
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

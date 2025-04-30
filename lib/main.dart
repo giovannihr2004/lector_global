@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          home: const RootScreen(),
+          home: const RootScreen(), // Pantalla principal
           routes: {
             '/login': (context) => const LoginScreen(),
             '/register': (context) => const RegisterScreen(),
@@ -114,9 +114,13 @@ class RootScreen extends StatelessWidget {
             body: Center(child: CircularProgressIndicator()),
           );
         } else if (snapshot.hasData) {
-          return const DashboardScreen();
+          // Si el usuario está autenticado, redirigir al Dashboard
+          Future.microtask(() {
+            Navigator.pushReplacementNamed(context, '/dashboard');
+          });
+          return const SizedBox(); // Espacio vacío mientras se realiza la redirección
         } else {
-          return const WelcomeScreen();
+          return const WelcomeScreen(); // Si no está autenticado, mostrar WelcomeScreen
         }
       },
     );
