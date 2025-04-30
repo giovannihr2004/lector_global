@@ -2,7 +2,7 @@
 // 📄 Archivo: login_screen.dart
 // 📍 Ubicación: lib/screens/auth/login_screen.dart
 // 📝 Descripción: Pantalla de inicio de sesión elegante, funcional y accesible.
-// 📅 Última actualización: 29/04/2025 - 21:28 (GMT-5)
+// 📅 Última actualización: 29/04/2025 - 21:40 (GMT-5)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -21,10 +21,23 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscureText = true;
 
   void _login(BuildContext context) async {
+    final email = emailController.text.trim();
+    final password = passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Por favor completa todos los campos"),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text,
+        email: email,
+        password: password,
       );
       Navigator.pushReplacementNamed(context, '/dashboard');
     } catch (e) {
