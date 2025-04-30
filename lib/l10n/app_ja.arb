@@ -18,7 +18,7 @@
 
   "completeAllFields": "すべての項目を入力してください。",
   "userNotFound": "ユーザーが見つかりません。",
-  "incorrectPassword": "パスワードが間違っています。",
+  "incorrectPassword": "パスワードが間違っています",
   "invalidEmail": "無効なメールアドレスです。",
   "loginError": "ログインエラー",
   "unexpectedError": "予期しないエラー",
@@ -31,5 +31,6 @@
   "facebookSignIn": "Facebookでログイン",
   "noAccount": "アカウントをお持ちではありませんか？",
   "registerHere": "ここで登録",
-  "termsAndPrivacy": "利用規約とプライバシーポリシーに同意します"
+  "termsAndPrivacy": "利用規約とプライバシーポリシーに同意します",
+  "forgotPassword": "パスワードをお忘れですか？"
 }

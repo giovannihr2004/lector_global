@@ -18,7 +18,7 @@
 
   "completeAllFields": "Please complete all fields.",
   "userNotFound": "User not found.",
-  "incorrectPassword": "Incorrect password.",
+  "incorrectPassword": "Incorrect password",
   "invalidEmail": "Invalid email.",
   "loginError": "Login error",
   "unexpectedError": "Unexpected error",
@@ -31,5 +31,6 @@
   "facebookSignIn": "Sign in with Facebook",
   "noAccount": "Don't have an account?",
   "registerHere": "Register here",
-  "termsAndPrivacy": "You accept our terms and privacy policy"
+  "termsAndPrivacy": "You accept our terms and privacy policy",
+  "forgotPassword": "Forgot your password?"
 }

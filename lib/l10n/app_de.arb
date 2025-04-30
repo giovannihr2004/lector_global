@@ -18,7 +18,7 @@
 
   "completeAllFields": "Bitte fülle alle Felder aus.",
   "userNotFound": "Benutzer nicht gefunden.",
-  "incorrectPassword": "Falsches Passwort.",
+  "incorrectPassword": "Falsches Passwort",
   "invalidEmail": "Ungültige E-Mail.",
   "loginError": "Anmeldefehler",
   "unexpectedError": "Unerwarteter Fehler",
@@ -31,5 +31,6 @@
   "facebookSignIn": "Mit Facebook einloggen",
   "noAccount": "Noch kein Konto?",
   "registerHere": "Hier registrieren",
-  "termsAndPrivacy": "Du akzeptierst unsere Bedingungen und Datenschutzrichtlinie"
+  "termsAndPrivacy": "Du akzeptierst unsere Bedingungen und Datenschutzrichtlinie",
+  "forgotPassword": "Passwort vergessen?"
 }

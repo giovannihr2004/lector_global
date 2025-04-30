@@ -18,7 +18,7 @@
 
   "completeAllFields": "Пожалуйста, заполните все поля.",
   "userNotFound": "Пользователь не найден.",
-  "incorrectPassword": "Неверный пароль.",
+  "incorrectPassword": "Неверный пароль",
   "invalidEmail": "Неверный email.",
   "loginError": "Ошибка входа",
   "unexpectedError": "Неожиданная ошибка",
@@ -31,5 +31,6 @@
   "facebookSignIn": "Войти через Facebook",
   "noAccount": "Нет аккаунта?",
   "registerHere": "Зарегистрируйтесь здесь",
-  "termsAndPrivacy": "Вы соглашаетесь с нашими условиями и политикой конфиденциальности"
+  "termsAndPrivacy": "Вы соглашаетесь с нашими условиями и политикой конфиденциальности",
+  "forgotPassword": "Забыли пароль?"
 }
