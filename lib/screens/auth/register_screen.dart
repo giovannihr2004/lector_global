@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // 📄 Archivo: register_screen.dart
-// 📝 Descripción: Registro con validaciones visuales y conexión Firebase funcional
-// 📅 Última actualización: 29/04/2025 - 23:45 (GMT-5)
+// 📝 Descripción: Registro con validaciones visuales y confirmación de contraseña
+// 📅 Última actualización: 30/04/2025 - 17:30 (GMT-5)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -20,6 +20,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   bool _obscurePassword = true;
   bool _isLoading = false;
@@ -48,6 +50,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
     if (value.trim().length < 6) {
       return 'Debe tener al menos 6 caracteres';
+    }
+    return null;
+  }
+
+  String? _validateConfirmPassword(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'La confirmación es obligatoria';
+    }
+    if (value.trim() != passwordController.text.trim()) {
+      return 'Las contraseñas no coinciden';
     }
     return null;
   }
@@ -149,6 +161,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 validator: _validatePassword,
+              ),
+              const SizedBox(height: 16),
+
+              TextFormField(
+                controller: confirmPasswordController,
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  labelText: 'Confirmar contraseña',
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.lock_outline),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
+                ),
+                validator: _validateConfirmPassword,
               ),
               const SizedBox(height: 24),
 
