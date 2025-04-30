@@ -1,110 +1,66 @@
 // -----------------------------------------------------------------------------
 // 📄 Archivo: dashboard_screen.dart
-// 📍 Ubicación: lib/screens/dashboard_screen.dart
-// 📝 Descripción: Pantalla principal con saludo personalizado y logout real.
-// 📅 Última actualización: 29/04/2025 - 17:49 (GMT-5)
+// 📝 Descripción: Pantalla principal con saludo y botón de cerrar sesión.
+// 📅 Última actualización: 29/04/2025 - 22:35 (GMT-5)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Para traducciones
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Obtener el usuario actual
     final user = FirebaseAuth.instance.currentUser;
-    final String userEmail = user?.email ?? 'Usuario';
-
-    // Acceso a traducciones
-    final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.dashboardTitle),
-        backgroundColor: Colors.deepPurple,
-        foregroundColor: Colors.white,
+        title: const Text('Panel principal'),
         actions: [
           IconButton(
-            tooltip: localizations.logout,
             icon: const Icon(Icons.logout),
+            tooltip: 'Cerrar sesión',
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
-              // Espera a que la sesión se cierre y luego redirige al login
-              Future.delayed(Duration.zero, () {
-                Navigator.pushReplacementNamed(context, '/login');
-              });
+              Navigator.pushReplacementNamed(context, '/login');
             },
           ),
         ],
       ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Saludo personalizado
-              Text(
-                '${localizations.welcome}, $userEmail',
-                style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Bienvenido, ${user?.email ?? 'Usuario'}',
+              style: const TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Comienza tu viaje lector aquí',
+              style: TextStyle(fontSize: 14, color: Colors.black54),
+            ),
+            const SizedBox(height: 32),
+            ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.menu_book),
+              label: const Text('Lecciones'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
               ),
-
-              const SizedBox(height: 16),
-
-              Text(
-                localizations.startYourReadingJourney,
-                style: const TextStyle(fontSize: 16),
-                textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.show_chart),
+              label: const Text('Mi progreso'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
               ),
-
-              const SizedBox(height: 40),
-
-              // Botón: Lecciones
-              ElevatedButton.icon(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(localizations.lessonsComingSoon)),
-                  );
-                },
-                icon: const Icon(Icons.menu_book),
-                label: Text(localizations.lessons),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 24,
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
-              // Botón: Progreso
-              ElevatedButton.icon(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(localizations.progressComingSoon)),
-                  );
-                },
-                icon: const Icon(Icons.show_chart),
-                label: Text(localizations.myProgress),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 24,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
