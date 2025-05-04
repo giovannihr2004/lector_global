@@ -2,15 +2,13 @@
 // Archivo principal de la aplicación Lector Global
 // Archivo: main.dart
 // Descripción: Configura el punto de entrada, tema, navegación inicial y control de sesión.
-// Versión: 2.0.2 - Corrección de importaciones para Firebase Analytics
-// Fecha: 04/05/2025 - Hora: 23:30 (Hora de Colombia)
+// Versión: 2.0.3 - Corrección definitiva de importaciones
+// Fecha: 04/05/2025 - Hora: 23:59 (Hora de Colombia)
 // -----------------------------------------------------------------------------
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_analytics/firebase_analytics.dart'; // ✅ Corrección: Importar correctamente Firebase Analytics
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Importar traducciones generadas
 import 'package:provider/provider.dart';
@@ -25,9 +23,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Inicializar Firebase usando el archivo de configuración generado
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(
     ChangeNotifierProvider(
