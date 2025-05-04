@@ -45,13 +45,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return null;
   }
 
-  // Validación de contraseña
+  // Validación de contraseña con requisitos
   String? _validatePassword(String? value) {
     if (value == null || value.trim().isEmpty) {
       return 'La contraseña es obligatoria';
     }
-    if (value.trim().length < 6) {
-      return 'Debe tener al menos 6 caracteres';
+    final passwordRegExp = RegExp(
+      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$',
+    );
+    if (!passwordRegExp.hasMatch(value.trim())) {
+      return 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial';
     }
     return null;
   }

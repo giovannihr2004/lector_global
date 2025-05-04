@@ -16,7 +16,10 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Obtener el usuario actual
     final user = FirebaseAuth.instance.currentUser;
-    final String userEmail = user?.email ?? 'Usuario';
+    final String userName =
+        user?.displayName ??
+        user?.email ??
+        'Usuario'; // Usar displayName si está disponible
 
     // Acceso a traducciones
     final localizations = AppLocalizations.of(context)!;
@@ -46,9 +49,9 @@ class DashboardScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Saludo personalizado
+              // Saludo personalizado con el nombre del usuario
               Text(
-                '${localizations.welcome}, $userEmail',
+                '${localizations.welcome}, $userName', // Mostrar nombre si está disponible, o correo si no
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,

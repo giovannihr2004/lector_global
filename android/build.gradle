@@ -1,0 +1,23 @@
+// Archivo: android/build.gradle
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.0'  // Cambia la versión si es necesario
+        classpath 'com.google.gms:google-services:4.4.2'  // Complemento de Google Services
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

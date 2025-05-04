@@ -50,3 +50,18 @@ flutter {
 // Plugin de Google Services necesario para Firebase Auth, Analytics, etc.
 // -----------------------------------------------------------------------------
 apply(plugin = "com.google.gms.google-services")
+
+// -----------------------------------------------------------------------------
+// Dependencias para Firebase
+// -----------------------------------------------------------------------------
+dependencies {
+    // Importar Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
+
+    // Agregar Firebase Analytics (o cualquier otro SDK de Firebase que uses)
+    implementation("com.google.firebase:firebase-analytics")
+
+    // Agrega más dependencias de Firebase si las necesitas
+    // Por ejemplo, Firebase Auth:
+    // implementation("com.google.firebase:firebase-auth")
+}
