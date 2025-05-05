@@ -5,6 +5,7 @@
   "developed_by": "Entwickelt von Jhovani Holguín Rojas",
   "version_info": "Version: 1.0.0",
   "date_info": "Datum: 23. April 2025",
+<<<<<<< HEAD
   "start_button": "Starten",
 
   "dashboardTitle": "Hauptübersicht",
@@ -33,4 +34,7 @@
   "registerHere": "Hier registrieren",
   "termsAndPrivacy": "Du akzeptierst unsere Bedingungen und Datenschutzrichtlinie",
   "forgotPassword": "Passwort vergessen?"
+=======
+  "start_button": "Starten"
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 }

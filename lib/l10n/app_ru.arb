@@ -1,6 +1,7 @@
 {
   "@@locale": "ru",
   "welcome_title": "Добро пожаловать в Lector Global",
+<<<<<<< HEAD
   "welcome_message": "Путешествие начинается с одной страницы",
   "developed_by": "Разработано Jhovani Holguín Rojas",
   "version_info": "Версия: 1.0.0",
@@ -33,4 +34,11 @@
   "registerHere": "Зарегистрируйтесь здесь",
   "termsAndPrivacy": "Вы соглашаетесь с нашими условиями и политикой конфиденциальности",
   "forgotPassword": "Забыли пароль?"
+=======
+  "welcome_message": "Путешествие начинается со страницы",
+  "developed_by": "Разработано Jhovani Holguín Rojas",
+  "version_info": "Версия: 1.0.0",
+  "date_info": "Дата: 23 апреля 2025",
+  "start_button": "Начать"
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 }

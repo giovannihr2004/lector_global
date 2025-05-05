@@ -20,6 +20,10 @@ class _SplashLogoScreenState extends State<SplashLogoScreen> {
   @override
   void initState() {
     super.initState();
+<<<<<<< HEAD
+=======
+    // Espera 3 segundos y navega automáticamente a la pantalla de texto de presentación
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
@@ -37,7 +41,16 @@ class _SplashLogoScreenState extends State<SplashLogoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple[50],
+<<<<<<< HEAD
       body: Center(child: Image.asset('assets/images/logo1.png', height: 180)),
+=======
+      body: Center(
+        child: Image.asset(
+          'assets/images/logo1.png',
+          height: 180,
+        ),
+      ),
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
     );
   }
 }

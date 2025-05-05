@@ -1,5 +1,23 @@
 {
+<<<<<<< HEAD
   "deepscan.ignoreConfirmWarning": true,
   "deepscan.enable": true,
   "java.configuration.updateBuildConfiguration": "interactive"
+=======
+  // Configuración general del proyecto (por ejemplo, en .vscode/settings.json)
+  // Revisión: 04/05/2025 - 08:06 p.m. (hora Colombia, GMT-5)
+
+  // Descripción general:
+  // Este archivo configura ajustes de herramientas específicas para el proyecto en VS Code.
+
+  "deepscan.ignoreConfirmWarning": true,
+  // Permite que DeepScan ignore advertencias de confirmación al analizar el código.
+
+  "deepscan.enable": true,
+  // Habilita DeepScan, una herramienta de análisis estático para detectar errores de JavaScript.
+
+  "java.configuration.updateBuildConfiguration": "interactive"
+  // Configura cómo se actualiza automáticamente el build de proyectos Java.
+  // "interactive" significa que se pedirá confirmación antes de actualizar automáticamente.
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 }

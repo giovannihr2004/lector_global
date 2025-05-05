@@ -1,5 +1,6 @@
 {
   "@@locale": "zh",
+<<<<<<< HEAD
   "welcome_title": "欢迎使用 Lector Global",
   "welcome_message": "旅程始于一页",
   "developed_by": "由 Jhovani Holguín Rojas 开发",
@@ -33,4 +34,12 @@
   "registerHere": "在这里注册",
   "termsAndPrivacy": "您接受我们的条款和隐私政策",
   "forgotPassword": "忘记密码？"
+=======
+  "welcome_title": "欢迎来到 Lector Global",
+  "welcome_message": "旅程从一页开始",
+  "developed_by": "由 Jhovani Holguín Rojas 开发",
+  "version_info": "版本：1.0.0",
+  "date_info": "日期：2025年4月23日",
+  "start_button": "开始"
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 }

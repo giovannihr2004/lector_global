@@ -14,6 +14,7 @@
   "lessons": "Lecciones",
   "lessonsComingSoon": "Sección de lecciones próximamente",
   "myProgress": "Mi progreso",
+<<<<<<< HEAD
   "progressComingSoon": "Sección de progreso próximamente",
 
   "completeAllFields": "Por favor completa todos los campos.",
@@ -33,4 +34,7 @@
   "registerHere": "Regístrate aquí",
   "termsAndPrivacy": "Aceptas nuestros términos y política de privacidad",
   "forgotPassword": "¿Olvidaste tu contraseña?"
+=======
+  "progressComingSoon": "Sección de progreso próximamente"
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 }

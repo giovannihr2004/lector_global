@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 gradle-wrapper.jar
 /.gradle
 /captures/
@@ -11,4 +12,38 @@ GeneratedPluginRegistrant.java
 # See https://flutter.dev/to/reference-keystore
 key.properties
 **/*.keystore
+=======
+# Comentario: Ignorar binario del wrapper de Gradle generado automáticamente.
+gradle-wrapper.jar
+
+# Comentario: Ignorar archivos de caché de Gradle locales que no deben compartirse.
+.gradle/
+
+# Comentario: Ignorar capturas de pantalla automáticas realizadas durante pruebas de Android Studio.
+captures/
+
+# Comentario: Ignorar script de Gradle para UNIX/Linux generado por Flutter/Android Studio.
+gradlew
+
+# Comentario: Ignorar script de Gradle para Windows generado por Flutter/Android Studio.
+gradlew.bat
+
+# Comentario: Ignorar configuraciones locales específicas del entorno de desarrollo (rutas locales).
+local.properties
+
+# Comentario: Ignorar archivo generado automáticamente por Flutter para registrar plugins.
+GeneratedPluginRegistrant.java
+
+# Comentario: Ignorar archivos generados por el sistema C++ de Android NDK.
+.cxx/
+
+# Comentario: Archivo de propiedades de claves (keystore) sensible: nunca compartir públicamente.
+# Referencia oficial: https://flutter.dev/to/reference-keystore
+key.properties
+
+# Comentario: Ignorar todos los archivos de tipo keystore (*.keystore) que contengan claves privadas.
+**/*.keystore
+
+# Comentario: Ignorar todos los archivos JKS (*.jks) que contengan almacenes de claves Java.
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 **/*.jks

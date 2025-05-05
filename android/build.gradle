@@ -1,0 +1,28 @@
+// Archivo: android/build.gradle
+// Fecha de última revisión: 04/05/2025 (Hora Colombia GMT-5)
+
+// Comentario: Configuración inicial de buildscript para definir repositorios y dependencias necesarias en el proceso de construcción.
+buildscript {
+    repositories {
+        google()  // Comentario: Repositorio oficial de Google para dependencias Android.
+        mavenCentral()  // Comentario: Repositorio Maven Central para bibliotecas comunes de Java y Android.
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.0'  // Comentario: Plugin de construcción de Android; ajustar versión si es necesario.
+        classpath 'com.google.gms:google-services:4.4.2'  // Comentario: Plugin de servicios de Google (Firebase, autenticación, etc.).
+    }
+}
+
+// Comentario: Configuración global de repositorios para todos los subproyectos del proyecto.
+allprojects {
+    repositories {
+        google()  // Comentario: Repositorio oficial de Google.
+        mavenCentral()  // Comentario: Repositorio Maven Central.
+    }
+}
+
+// Comentario: Tarea personalizada para limpiar los archivos de construcción del proyecto.
+task clean(type: Delete) {
+    delete rootProject.buildDir  // Comentario: Elimina la carpeta de construcción raíz para forzar una reconstrucción limpia.
+}
+

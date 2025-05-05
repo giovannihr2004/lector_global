@@ -1,7 +1,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<<<<<<< HEAD
     <!-- The INTERNET permission is required for development. Specifically,
          the Flutter tool needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->
     <uses-permission android:name="android.permission.INTERNET"/>
+=======
+  <!--
+  Archivo de manifiesto de Android para permisos mínimos
+  Revisión: 04/05/2025 - 08:09 p.m. (hora Colombia, GMT-5)
+
+  Descripción general:
+  Este fragmento pertenece al `AndroidManifest.xml`.
+  Define permisos requeridos por la aplicación Flutter en Android.
+
+  En este caso, solicita permiso de acceso a Internet.
+
+  Detalle:
+  - El permiso INTERNET es necesario para:
+    * Comunicación entre el dispositivo/emulador y el IDE (por ejemplo, depuración con breakpoints).
+    * Funcionalidades como Hot Reload y Hot Restart durante el desarrollo.
+  -->
+
+  <uses-permission android:name="android.permission.INTERNET" />
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 </manifest>

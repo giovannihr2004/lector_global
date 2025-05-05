@@ -1,0 +1,44 @@
+// Archivo: android/app/build.gradle
+// Revisión: 04/05/2025 - 08:25 p.m. (hora Colombia, GMT-5)
+
+// Descripción general:
+// Este archivo define la configuración de compilación del módulo Android para Flutter.
+// Aquí se especifican el SDK, las versiones mínimas y objetivo, las dependencias, y los tipos de build.
+
+// ------------------------------------------------------------
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 33 // Versión de SDK para compilar la app
+
+    defaultConfig {
+        applicationId "com.example.lectorGlobal" // Identificador único del paquete de la aplicación
+        minSdkVersion 21                         // Versión mínima de Android soportada
+        targetSdkVersion 33                      // Versión de Android objetivo
+        versionCode 1                            // Código interno de versión (incremental)
+        versionName "1.0"                         // Nombre visible de la versión
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false // No ofuscar ni minimizar en modo release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Archivos de reglas de ProGuard para optimizar el APK
+        }
+    }
+}
+
+// ------------------------------------------------------------
+dependencies {
+    // Plataforma de dependencias para unificar versiones de Firebase
+    implementation platform("com.google.firebase:firebase-bom:33.13.0")
+
+    // Módulo de Analytics de Firebase
+    implementation "com.google.firebase:firebase-analytics"
+
+    // Aquí se pueden agregar otras dependencias necesarias para el proyecto
+}
+
+// ------------------------------------------------------------
+apply plugin: 'com.google.gms.google-services' 
+// Plugin para habilitar los servicios de Google (Firebase, Analytics, etc.)

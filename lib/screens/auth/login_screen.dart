@@ -1,15 +1,25 @@
 // -----------------------------------------------------------------------------
 // 📄 Archivo: login_screen.dart
+<<<<<<< HEAD
 // 📝 Descripción: Pantalla de login con detección de conexión funcional en Web
 // 📅 Última actualización: 30/04/2025 - 20:50 (GMT-5)
+=======
+// 📍 Ubicación: lib/screens/auth/login_screen.dart
+// 📝 Descripción: Pantalla de inicio de sesión inteligente: correo o teléfono.
+// 📅 Última actualización: 04/05/2025 - 23:30 (GMT-5)
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+<<<<<<< HEAD
 import '../../widgets/language_selector.dart';
 import 'register_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
+=======
+import 'phone_verification_screen.dart';
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,6 +29,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+<<<<<<< HEAD
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool _obscurePassword = true;
@@ -128,10 +139,115 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
     );
+=======
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController emailOrPhoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool _obscureText = true;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  bool _isEmail(String input) {
+    return input.contains('@') && input.contains('.');
+  }
+
+  Future<void> _login() async {
+    final input = emailOrPhoneController.text.trim();
+    final password = passwordController.text;
+
+    if (input.isEmpty) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Por favor ingresa tu correo o teléfono"),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    if (_isEmail(input)) {
+      // Login por correo electrónico
+      if (password.isEmpty) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Por favor ingresa tu contraseña"),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
+
+      try {
+        await _auth.signInWithEmailAndPassword(
+          email: input,
+          password: password,
+        );
+
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, '/dashboard');
+      } on FirebaseAuthException catch (e) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error al iniciar sesión: ${e.message}')),
+        );
+      }
+    } else if (RegExp(r'^[0-9]{10}$').hasMatch(input)) {
+      // Login por teléfono
+      try {
+        await _auth.verifyPhoneNumber(
+          phoneNumber: '+57$input',
+          verificationCompleted: (PhoneAuthCredential credential) async {
+            // Si el teléfono se verifica automáticamente
+            await _auth.signInWithCredential(credential);
+            if (!mounted) return;
+            Navigator.pushReplacementNamed(context, '/dashboard');
+          },
+          verificationFailed: (FirebaseAuthException e) {
+            if (!mounted) return;
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Error en la verificación: ${e.message}'),
+                backgroundColor: Colors.red,
+              ),
+            );
+          },
+          codeSent: (String verificationId, int? resendToken) {
+            if (!mounted) return;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder:
+                    (context) =>
+                        PhoneVerificationScreen(verificationId: verificationId),
+              ),
+            );
+          },
+          codeAutoRetrievalTimeout: (String verificationId) {},
+        );
+      } catch (e) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error inesperado: $e')));
+      }
+    } else {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Formato inválido. Ingresa un correo o teléfono válido.',
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
   }
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     final loc = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -262,6 +378,127 @@ class _LoginScreenState extends State<LoginScreen> {
               style: const TextStyle(fontSize: 11, color: Colors.black54),
             ),
           ],
+=======
+    return Scaffold(
+      appBar: AppBar(title: const Text('Iniciar sesión')),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 24),
+
+              SizedBox(
+                height: 120,
+                child: Image.asset("assets/images/logo1.png"),
+              ),
+
+              const SizedBox(height: 12),
+
+              const Text(
+                "El viaje comienza con una página.",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+
+              const SizedBox(height: 24),
+
+              // Campo de correo o teléfono
+              TextFormField(
+                controller: emailOrPhoneController,
+                decoration: InputDecoration(
+                  labelText: 'Correo electrónico o teléfono',
+                  prefixIcon: const Icon(
+                    Icons.person,
+                    color: Colors.deepPurple,
+                  ),
+                  border: const OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.emailAddress,
+              ),
+              const SizedBox(height: 16),
+
+              // Campo de contraseña (solo para email)
+              TextFormField(
+                controller: passwordController,
+                obscureText: _obscureText,
+                decoration: InputDecoration(
+                  labelText: 'Contraseña (solo para correo)',
+                  prefixIcon: const Icon(Icons.lock, color: Colors.deepPurple),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.deepPurple,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  ),
+                  border: const OutlineInputBorder(),
+                ),
+              ),
+
+              const SizedBox(height: 24),
+
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: _login,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    foregroundColor: Colors.white,
+                    elevation: 6,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    textStyle: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  child: const Text('Ingresar'),
+                ),
+              ),
+
+              const SizedBox(height: 24),
+
+              // Enlace para registrarse
+              Align(
+                alignment: Alignment.center,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/register');
+                  },
+                  child: const Text.rich(
+                    TextSpan(
+                      text: '¿No tienes cuenta? ',
+                      style: TextStyle(color: Colors.black87),
+                      children: [
+                        TextSpan(
+                          text: 'Regístrate aquí',
+                          style: TextStyle(
+                            color: Colors.deepPurple,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ],
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
+          ),
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
         ),
       ),
     );

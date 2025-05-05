@@ -1,5 +1,6 @@
 {
   "@@locale": "ja",
+<<<<<<< HEAD
   "welcome_title": "Lector Global へようこそ",
   "welcome_message": "旅は1ページから始まる",
   "developed_by": "Jhovani Holguín Rojas によって開発されました",
@@ -33,4 +34,12 @@
   "registerHere": "ここで登録",
   "termsAndPrivacy": "利用規約とプライバシーポリシーに同意します",
   "forgotPassword": "パスワードをお忘れですか？"
+=======
+  "welcome_title": "レクターグローバルへようこそ",
+  "welcome_message": "旅は一枚のページから始まる",
+  "developed_by": "Jhovani Holguín Rojasによって開発されました",
+  "version_info": "バージョン: 1.0.0",
+  "date_info": "日付: 2025年4月23日",
+  "start_button": "始める"
+>>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 }
