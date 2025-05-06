@@ -1,16 +1,25 @@
-// 📅 Última actualización: 29/04/2025 - 00:15 (Hora de Colombia)
-// Widget: Selector de Idioma para Lector Global - Sin idioma coreano ('ko')
+// -----------------------------------------------------------------------------
+// 📄 Archivo: language_selector.dart
+// 📍 Ubicación: lib/widgets/language_selector.dart
+// 📝 Descripción: Selector de idioma profesional para Lector Global
+// 📅 Última actualización: 06/05/2025 - 02:10 (Hora de Colombia)
+// -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../language_provider.dart';
+import '../language_provider.dart'; // ✅ Importación correcta
 
 class LanguageSelector extends StatelessWidget {
-  const LanguageSelector({Key? key}) : super(key: key);
+  const LanguageSelector({super.key}); // ✅ Corrección profesional aplicada
 
   @override
   Widget build(BuildContext context) {
-    final languageNames = {
+    final languageProvider = Provider.of<LanguageProvider>(
+      context,
+      listen: true,
+    );
+
+    final Map<String, String> languageNames = {
       'es': 'Español',
       'en': 'English',
       'fr': 'Français',
@@ -20,10 +29,27 @@ class LanguageSelector extends StatelessWidget {
       'ru': 'Русский',
       'ja': '日本語',
       'zh': '中文',
+      'ar': 'العربية', // ✅ Árabe agregado
     };
 
+    // ✅ Protección total contra valores vacíos o nulos
+    final selectedLanguageCode =
+        (languageProvider.locale.languageCode.isNotEmpty)
+            ? languageProvider.locale.languageCode
+            : 'es';
+
     return DropdownButton<String>(
-      value: context.watch<LanguageProvider>().locale.languageCode,
+      value:
+          languageNames.containsKey(selectedLanguageCode)
+              ? selectedLanguageCode
+              : 'es', // ✅ Garantiza siempre un valor válido
+      icon: const Icon(Icons.language, color: Colors.deepPurple),
+      underline: Container(),
+      onChanged: (String? newLanguageCode) {
+        if (newLanguageCode != null) {
+          languageProvider.changeLanguage(newLanguageCode); // ✅ Cambio correcto
+        }
+      },
       items:
           languageNames.entries.map((entry) {
             return DropdownMenuItem<String>(
@@ -31,11 +57,6 @@ class LanguageSelector extends StatelessWidget {
               child: Text(entry.value),
             );
           }).toList(),
-      onChanged: (String? newValue) {
-        if (newValue != null) {
-          context.read<LanguageProvider>().changeLanguage(newValue);
-        }
-      },
     );
   }
 }
