@@ -1,28 +1,24 @@
-// Archivo: android/build.gradle
-// Fecha de última revisión: 04/05/2025 (Hora Colombia GMT-5)
+// -----------------------------------------------------------------------------
+// 📄 Archivo: android/build.gradle
+// 📝 Descripción: Configuración raíz de Gradle para Flutter + Firebase moderno.
+// 📅 Última actualización: 06/05/2025 - 21:40 (Hora de Colombia)
+// -----------------------------------------------------------------------------
 
-// Comentario: Configuración inicial de buildscript para definir repositorios y dependencias necesarias en el proceso de construcción.
 buildscript {
     repositories {
-        google()  // Comentario: Repositorio oficial de Google para dependencias Android.
-        mavenCentral()  // Comentario: Repositorio Maven Central para bibliotecas comunes de Java y Android.
+        google()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.0'  // Comentario: Plugin de construcción de Android; ajustar versión si es necesario.
-        classpath 'com.google.gms:google-services:4.4.2'  // Comentario: Plugin de servicios de Google (Firebase, autenticación, etc.).
+        classpath("com.android.tools.build:gradle:8.2.2") // ✅ Gradle moderno compatible Flutter 3.22
+        classpath("com.google.gms:google-services:4.3.15") // ✅ Google Services para Firebase
+        // Puedes agregar más classpaths aquí si los necesitas (por ejemplo Crashlytics)
     }
 }
 
-// Comentario: Configuración global de repositorios para todos los subproyectos del proyecto.
 allprojects {
     repositories {
-        google()  // Comentario: Repositorio oficial de Google.
-        mavenCentral()  // Comentario: Repositorio Maven Central.
+        google()
+        mavenCentral()
     }
 }
-
-// Comentario: Tarea personalizada para limpiar los archivos de construcción del proyecto.
-task clean(type: Delete) {
-    delete rootProject.buildDir  // Comentario: Elimina la carpeta de construcción raíz para forzar una reconstrucción limpia.
-}
-
