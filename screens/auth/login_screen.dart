@@ -1,23 +1,12 @@
-<<<<<<< HEAD
-// ---------------------------------------------------------------------
-// Pantalla de inicio de sesión para la aplicación Lector Global
-// Fecha: 20/04/2025 - 20:25
-// ---------------------------------------------------------------------
-
-import 'package:flutter/material.dart';
-import 'register_screen.dart';
-=======
 // -----------------------------------------------------------------------------
-// Pantalla de inicio de sesión para la aplicación Lector Global
-// Archivo: login_screen.dart
-// Descripción: Permite a los usuarios iniciar sesión o ir al registro.
-// Versión: 1.1.0
-// Fecha: 04/05/2025 - Hora: 18:50 (202505041850)
+// 📄 Archivo: login_screen.dart
+// 📍 Ubicación: lib/screens/auth/login_screen.dart
+// 📝 Descripción: Pantalla de inicio de sesión para Lector Global. Permite iniciar sesión o navegar al registro.
+// 📅 Última actualización: 06/05/2025 - 19:00 (Hora de Colombia)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
 import 'package:lector_global/screens/auth/register_screen.dart';
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -55,12 +44,7 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 20),
             TextButton(
               onPressed: () {
-<<<<<<< HEAD
-                // Navegar a la pantalla de registro
-                Navigator.push(
-=======
                 Navigator.pushReplacement(
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
                   context,
                   MaterialPageRoute(
                     builder: (context) => const RegisterScreen(),

@@ -1,79 +1,30 @@
+<!-- -----------------------------------------------------------------------------
+ 📄 Archivo: android/app/src/main/AndroidManifest.xml
+ 📝 Descripción: Configuración principal de la app Flutter para Android.
+ 📅 Última actualización: 06/05/2025 - 21:05 (Hora de Colombia)
+ ----------------------------------------------------------------------------- -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-<<<<<<< HEAD
-    <application
-        android:label="lector_global"
-        android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:launchMode="singleTop"
-            android:taskAffinity=""
-            android:theme="@style/LaunchTheme"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-            android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
-            <!-- Specifies an Android theme to apply to this Activity as soon as
-                 the Android process has started. This theme is visible to the user
-                 while the Flutter UI initializes. After that, this theme continues
-                 to determine the Window background behind the Flutter UI. -->
-            <meta-data
-              android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/NormalTheme"
-              />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <!-- Don't delete the meta-data below.
-             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
-        <meta-data
-            android:name="flutterEmbedding"
-            android:value="2" />
-    </application>
-    <!-- Required to query activities that can process text, see:
-         https://developer.android.com/training/package-visibility and
-         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
-
-         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.PROCESS_TEXT"/>
-            <data android:mimeType="text/plain"/>
-        </intent>
-    </queries>
-=======
-  <!--
-  Archivo AndroidManifest.xml principal de la app
-  Revisión: 04/05/2025 - 08:19 p.m. (hora Colombia, GMT-5)
-
-  Descripción general:
-  Este manifiesto define las configuraciones principales de la aplicación Flutter en Android:
-  actividades, temas, metadatos, permisos especiales y filtros de intentos.
-  -->
 
   <application
-    android:label="lector_global"              <!-- Nombre visible de la aplicación -->
-    android:name="${applicationName}"          <!-- Nombre de la clase Application, definido en el build -->
-    android:icon="@mipmap/ic_launcher">         <!-- Icono de la aplicación -->
+    android:label="lector_global"
+    android:name="${applicationName}"
+    android:icon="@mipmap/ic_launcher">
 
     <activity
-      android:name=".MainActivity"              <!-- Actividad principal -->
-      android:exported="true"                   <!-- Necesario en Android 12+ para actividades lanzables -->
-      android:launchMode="singleTop"             <!-- Evita crear múltiples instancias si ya existe una activa -->
-      android:taskAffinity=""                   <!-- Hereda afinidad predeterminada (misma tarea que otras apps) -->
-      android:theme="@style/LaunchTheme"         <!-- Tema inicial visible al usuario antes del renderizado Flutter -->
+      android:name=".MainActivity"
+      android:exported="true"
+      android:launchMode="singleTop"
+      android:taskAffinity=""
+      android:theme="@style/LaunchTheme"
       android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-      android:hardwareAccelerated="true"         <!-- Habilita la aceleración por hardware -->
-      android:windowSoftInputMode="adjustResize" <!-- Ajuste del teclado virtual sobre el contenido -->>
+      android:hardwareAccelerated="true"
+      android:windowSoftInputMode="adjustResize">
 
-      <!-- Tema normal para la actividad Flutter después de inicializar -->
       <meta-data
         android:name="io.flutter.embedding.android.NormalTheme"
         android:resource="@style/NormalTheme" />
 
-      <!-- Filtro de intentos para definir esta actividad como principal -->
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
@@ -81,19 +32,19 @@
 
     </activity>
 
-    <!-- Meta-dato esencial para Flutter: versión de embedding -->
+    <!-- Meta-dato requerido para Flutter embedding versión 2 -->
     <meta-data
       android:name="flutterEmbedding"
       android:value="2" />
 
   </application>
 
-  <!-- Consultas necesarias para el procesamiento de texto en Android 11+ -->
+  <!-- Permite consultar actividades que procesan texto (para Android 11+) -->
   <queries>
     <intent>
       <action android:name="android.intent.action.PROCESS_TEXT"/>
       <data android:mimeType="text/plain"/>
     </intent>
   </queries>
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
+
 </manifest>

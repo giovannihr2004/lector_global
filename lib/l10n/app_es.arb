@@ -14,27 +14,28 @@
   "lessons": "Lecciones",
   "lessonsComingSoon": "Sección de lecciones próximamente",
   "myProgress": "Mi progreso",
-<<<<<<< HEAD
   "progressComingSoon": "Sección de progreso próximamente",
 
   "completeAllFields": "Por favor completa todos los campos.",
   "userNotFound": "Usuario no encontrado.",
-  "incorrectPassword": "Contraseña incorrecta",
+  "incorrectPassword": "Contraseña incorrecta.",
   "invalidEmail": "Correo electrónico inválido.",
-  "loginError": "Error al iniciar sesión",
+  
+  "loginError": "Error de inicio de sesión",
   "unexpectedError": "Error inesperado",
+  "invalidFormat": "Formato inválido. Ingresa un correo o teléfono válido.",
+  "pleaseEnterEmailOrPhone": "Por favor ingresa tu correo o teléfono.",
+  "pleaseEnterPassword": "Por favor ingresa tu contraseña.",
+  
   "loginTitle": "Iniciar sesión",
   "loginSubtitle": "Accede con tu cuenta",
   "emailLabel": "Correo electrónico",
   "passwordLabel": "Contraseña",
   "loginButton": "Ingresar",
-  "googleSignIn": "Iniciar con Google",
-  "facebookSignIn": "Iniciar con Facebook",
+  "googleSignIn": "Ingresar con Google",
+  "facebookSignIn": "Ingresar con Facebook",
   "noAccount": "¿No tienes cuenta?",
   "registerHere": "Regístrate aquí",
   "termsAndPrivacy": "Aceptas nuestros términos y política de privacidad",
   "forgotPassword": "¿Olvidaste tu contraseña?"
-=======
-  "progressComingSoon": "Sección de progreso próximamente"
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 }

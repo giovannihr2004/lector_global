@@ -1,22 +1,10 @@
 // -----------------------------------------------------------------------------
-<<<<<<< HEAD
 // 📄 Archivo: register_screen.dart
-// 📝 Descripción: Registro con validaciones visuales y confirmación de contraseña
-// 📅 Última actualización: 30/04/2025 - 17:30 (GMT-5)
+// 📝 Descripción: Registro de usuario moderno, validaciones estrictas, animaciones suaves.
+// 📅 Última actualización: 06/05/2025 - (hora Colombia GMT-5)
 // -----------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-=======
-// Pantalla de Registro profesional con validaciones, botón animado y FadeIn
-// Archivo: register_screen.dart
-// Descripción: Registro de usuario moderno, validaciones estrictas, animaciones suaves.
-// Versión: 2.3.0
-// Fecha: 04/05/2025 - Hora: 20:20 (202505042020)
-// -----------------------------------------------------------------------------
-
-import 'package:flutter/material.dart';
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -25,88 +13,6 @@ class RegisterScreen extends StatefulWidget {
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-<<<<<<< HEAD
-class _RegisterScreenState extends State<RegisterScreen> {
-  final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
-
-  bool _obscurePassword = true;
-  bool _isLoading = false;
-
-  String? _validateName(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return 'El nombre es obligatorio';
-    }
-    return null;
-  }
-
-  String? _validateEmail(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return 'El correo es obligatorio';
-    }
-    final emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
-    if (!emailRegex.hasMatch(value.trim())) {
-      return 'Formato de correo inválido';
-    }
-    return null;
-  }
-
-  String? _validatePassword(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return 'La contraseña es obligatoria';
-    }
-    if (value.trim().length < 6) {
-      return 'Debe tener al menos 6 caracteres';
-    }
-    return null;
-  }
-
-  String? _validateConfirmPassword(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return 'La confirmación es obligatoria';
-    }
-    if (value.trim() != passwordController.text.trim()) {
-      return 'Las contraseñas no coinciden';
-    }
-    return null;
-  }
-
-  Future<void> _submitForm() async {
-    if (_formKey.currentState!.validate()) {
-      final email = emailController.text.trim();
-      final password = passwordController.text.trim();
-
-      setState(() => _isLoading = true);
-
-      try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('✅ Usuario registrado correctamente'),
-            backgroundColor: Colors.green,
-          ),
-        );
-
-        Navigator.pushReplacementNamed(context, '/dashboard');
-      } on FirebaseAuthException catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('❌ Error al registrar: ${e.message}'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      } finally {
-        setState(() => _isLoading = false);
-=======
 class _RegisterScreenState extends State<RegisterScreen>
     with TickerProviderStateMixin {
   // ---------------------------------------------------------------------------
@@ -181,119 +87,10 @@ class _RegisterScreenState extends State<RegisterScreen>
         messenger.showSnackBar(
           const SnackBar(content: Text('Usuario registrado exitosamente.')),
         );
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
       }
     }
   }
 
-<<<<<<< HEAD
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Registro')),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Form(
-          key: _formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Text(
-                'Crear cuenta',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 32),
-
-              TextFormField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Nombre completo',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.person_outline),
-                ),
-                validator: _validateName,
-              ),
-              const SizedBox(height: 16),
-
-              TextFormField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Correo electrónico',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.email_outlined),
-                ),
-                keyboardType: TextInputType.emailAddress,
-                validator: _validateEmail,
-              ),
-              const SizedBox(height: 16),
-
-              TextFormField(
-                controller: passwordController,
-                obscureText: _obscurePassword,
-                decoration: InputDecoration(
-                  labelText: 'Contraseña',
-                  border: const OutlineInputBorder(),
-                  prefixIcon: const Icon(Icons.lock_outline),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscurePassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscurePassword = !_obscurePassword;
-                      });
-                    },
-                  ),
-                ),
-                validator: _validatePassword,
-              ),
-              const SizedBox(height: 16),
-
-              TextFormField(
-                controller: confirmPasswordController,
-                obscureText: _obscurePassword,
-                decoration: InputDecoration(
-                  labelText: 'Confirmar contraseña',
-                  border: const OutlineInputBorder(),
-                  prefixIcon: const Icon(Icons.lock_outline),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscurePassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscurePassword = !_obscurePassword;
-                      });
-                    },
-                  ),
-                ),
-                validator: _validateConfirmPassword,
-              ),
-              const SizedBox(height: 24),
-
-              ElevatedButton(
-                onPressed: _isLoading ? null : _submitForm,
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: Colors.deepPurple,
-                  foregroundColor: Colors.white,
-                ),
-                child:
-                    _isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(
-                          'Registrarse',
-                          style: TextStyle(fontSize: 18),
-                        ),
-              ),
-            ],
-=======
   // ---------------------------------------------------------------------------
   // Construcción de la interfaz
   // ---------------------------------------------------------------------------
@@ -316,9 +113,6 @@ class _RegisterScreenState extends State<RegisterScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // ------------------------------------------------------------
-                // Título y subtítulo de bienvenida
-                // ------------------------------------------------------------
                 const Text(
                   '¡Bienvenido!',
                   style: TextStyle(
@@ -336,9 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                 ),
                 const SizedBox(height: 32),
 
-                // ------------------------------------------------------------
-                // Campo: Nombre completo con FadeIn
-                // ------------------------------------------------------------
+                // Nombre
                 AnimatedOpacity(
                   opacity: _showNameField ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: 500),
@@ -362,9 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                 ),
                 const SizedBox(height: 16),
 
-                // ------------------------------------------------------------
-                // Campo: Correo electrónico con FadeIn
-                // ------------------------------------------------------------
+                // Email
                 AnimatedOpacity(
                   opacity: _showEmailField ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: 500),
@@ -389,9 +179,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                 ),
                 const SizedBox(height: 16),
 
-                // ------------------------------------------------------------
-                // Campo: Contraseña con FadeIn
-                // ------------------------------------------------------------
+                // Contraseña
                 AnimatedOpacity(
                   opacity: _showPasswordField ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: 500),
@@ -428,9 +216,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                 ),
                 const SizedBox(height: 16),
 
-                // ------------------------------------------------------------
-                // Campo: Confirmar contraseña con FadeIn
-                // ------------------------------------------------------------
+                // Confirmar Contraseña
                 AnimatedOpacity(
                   opacity: _showConfirmPasswordField ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: 500),
@@ -468,9 +254,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                 ),
                 const SizedBox(height: 32),
 
-                // ------------------------------------------------------------
-                // Botón de registro con animación de escala
-                // ------------------------------------------------------------
+                // Botón de registro
                 _isLoading
                     ? const Center(child: CircularProgressIndicator())
                     : AnimatedScale(
@@ -505,7 +289,6 @@ class _RegisterScreenState extends State<RegisterScreen>
                     ),
               ],
             ),
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
           ),
         ),
       ),

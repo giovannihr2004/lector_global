@@ -27,6 +27,8 @@ dependencies:
 
   firebase_auth: ^4.17.5
 
+  firebase_analytics: ^10.10.7
+
   google_sign_in: ^6.3.0
 
   flutter_facebook_auth: ^6.1.1
@@ -34,12 +36,8 @@ dependencies:
   plugin_platform_interface: ^2.1.8
 
   flutter_svg: ^2.0.7
-<<<<<<< HEAD
 
   http: ^1.3.0
-=======
-  firebase_analytics: ^10.10.7
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 
 dev_dependencies:
   flutter_test:

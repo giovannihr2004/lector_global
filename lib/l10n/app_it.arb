@@ -1,15 +1,10 @@
 {
   "@@locale": "it",
-<<<<<<< HEAD
   "welcome_title": "Benvenuto in Lector Global",
-=======
-  "welcome_title": "Benvenuto su Lector Global",
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
   "welcome_message": "Il viaggio inizia con una pagina",
   "developed_by": "Sviluppato da Jhovani Holguín Rojas",
   "version_info": "Versione: 1.0.0",
   "date_info": "Data: 23 aprile 2025",
-<<<<<<< HEAD
   "start_button": "Inizia",
 
   "dashboardTitle": "Pannello principale",
@@ -23,10 +18,15 @@
 
   "completeAllFields": "Completa tutti i campi.",
   "userNotFound": "Utente non trovato.",
-  "incorrectPassword": "Password errata",
+  "incorrectPassword": "Password errata.",
   "invalidEmail": "Email non valida.",
+
   "loginError": "Errore di accesso",
   "unexpectedError": "Errore imprevisto",
+  "invalidFormat": "Formato non valido. Inserisci un'email o un numero di telefono valido.",
+  "pleaseEnterEmailOrPhone": "Inserisci la tua email o il tuo numero di telefono.",
+  "pleaseEnterPassword": "Inserisci la tua password.",
+
   "loginTitle": "Accesso",
   "loginSubtitle": "Accedi con il tuo account",
   "emailLabel": "Email",
@@ -38,7 +38,4 @@
   "registerHere": "Registrati qui",
   "termsAndPrivacy": "Accetti i nostri termini e la nostra politica sulla privacy",
   "forgotPassword": "Password dimenticata?"
-=======
-  "start_button": "Inizia"
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 }

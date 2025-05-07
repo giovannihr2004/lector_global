@@ -1,32 +1,32 @@
 {
   "@@locale": "fr",
-<<<<<<< HEAD
   "welcome_title": "Bienvenue à Lector Global",
-=======
-  "welcome_title": "Bienvenue sur Lector Global",
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
   "welcome_message": "Le voyage commence par une page",
   "developed_by": "Développé par Jhovani Holguín Rojas",
   "version_info": "Version : 1.0.0",
   "date_info": "Date : 23 avril 2025",
-<<<<<<< HEAD
   "start_button": "Commencer",
 
-  "dashboardTitle": "Tableau de bord",
+  "dashboardTitle": "Tableau de bord principal",
   "logout": "Se déconnecter",
   "welcome": "Bienvenue",
   "startYourReadingJourney": "Commencez votre voyage de lecture ici",
   "lessons": "Leçons",
-  "lessonsComingSoon": "Section des leçons à venir",
+  "lessonsComingSoon": "Section des leçons bientôt disponible",
   "myProgress": "Mon progrès",
-  "progressComingSoon": "Section des progrès à venir",
+  "progressComingSoon": "Section des progrès bientôt disponible",
 
   "completeAllFields": "Veuillez remplir tous les champs.",
   "userNotFound": "Utilisateur non trouvé.",
-  "incorrectPassword": "Mot de passe incorrect",
+  "incorrectPassword": "Mot de passe incorrect.",
   "invalidEmail": "E-mail invalide.",
+
   "loginError": "Erreur de connexion",
   "unexpectedError": "Erreur inattendue",
+  "invalidFormat": "Format invalide. Veuillez entrer un e-mail ou un numéro de téléphone valide.",
+  "pleaseEnterEmailOrPhone": "Veuillez entrer votre e-mail ou votre téléphone.",
+  "pleaseEnterPassword": "Veuillez entrer votre mot de passe.",
+
   "loginTitle": "Connexion",
   "loginSubtitle": "Accédez avec votre compte",
   "emailLabel": "E-mail",
@@ -38,7 +38,4 @@
   "registerHere": "Inscrivez-vous ici",
   "termsAndPrivacy": "Vous acceptez nos conditions et notre politique de confidentialité",
   "forgotPassword": "Mot de passe oublié ?"
-=======
-  "start_button": "Commencer"
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 }

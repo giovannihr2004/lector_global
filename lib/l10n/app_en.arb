@@ -5,7 +5,6 @@
   "developed_by": "Developed by Jhovani Holguín Rojas",
   "version_info": "Version: 1.0.0",
   "date_info": "Date: April 23, 2025",
-<<<<<<< HEAD
   "start_button": "Start",
 
   "dashboardTitle": "Main Dashboard",
@@ -19,10 +18,15 @@
 
   "completeAllFields": "Please complete all fields.",
   "userNotFound": "User not found.",
-  "incorrectPassword": "Incorrect password",
+  "incorrectPassword": "Incorrect password.",
   "invalidEmail": "Invalid email.",
+
   "loginError": "Login error",
   "unexpectedError": "Unexpected error",
+  "invalidFormat": "Invalid format. Please enter a valid email or phone number.",
+  "pleaseEnterEmailOrPhone": "Please enter your email or phone.",
+  "pleaseEnterPassword": "Please enter your password.",
+
   "loginTitle": "Login",
   "loginSubtitle": "Access with your account",
   "emailLabel": "Email",
@@ -34,7 +38,4 @@
   "registerHere": "Register here",
   "termsAndPrivacy": "You accept our terms and privacy policy",
   "forgotPassword": "Forgot your password?"
-=======
-  "start_button": "Start"
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 }

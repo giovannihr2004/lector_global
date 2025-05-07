@@ -1,4 +1,4 @@
-// 📅 Última actualización: 27/04/2025 - 16:41 (hora Colombia)
+// 📅 Última actualización: 04/05/2025 - (hora Colombia)
 // Traducción al árabe para Lector Global
 
 import '../l10n/app_localizations.dart';
@@ -8,8 +8,22 @@ class AppLocalizationsAr implements AppLocalizations {
   String get welcome => 'مرحبًا بكم في Lector Global';
 
   @override
-  String get start_button => 'ابدأ';
+  String get startButton => 'ابدأ';
 
   @override
   String get description => 'تبدأ الرحلة من صفحة واحدة';
+
+  @override
+  String translate(String key) {
+    switch (key) {
+      case 'welcome':
+        return welcome;
+      case 'startButton':
+        return startButton;
+      case 'description':
+        return description;
+      default:
+        return '';
+    }
+  }
 }

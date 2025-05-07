@@ -1,7 +1,6 @@
 {
   "@@locale": "ru",
   "welcome_title": "Добро пожаловать в Lector Global",
-<<<<<<< HEAD
   "welcome_message": "Путешествие начинается с одной страницы",
   "developed_by": "Разработано Jhovani Holguín Rojas",
   "version_info": "Версия: 1.0.0",
@@ -19,10 +18,15 @@
 
   "completeAllFields": "Пожалуйста, заполните все поля.",
   "userNotFound": "Пользователь не найден.",
-  "incorrectPassword": "Неверный пароль",
+  "incorrectPassword": "Неверный пароль.",
   "invalidEmail": "Неверный email.",
+
   "loginError": "Ошибка входа",
   "unexpectedError": "Неожиданная ошибка",
+  "invalidFormat": "Неверный формат. Пожалуйста, введите действительный email или номер телефона.",
+  "pleaseEnterEmailOrPhone": "Пожалуйста, введите вашу электронную почту или номер телефона.",
+  "pleaseEnterPassword": "Пожалуйста, введите ваш пароль.",
+
   "loginTitle": "Вход",
   "loginSubtitle": "Войдите в свой аккаунт",
   "emailLabel": "Электронная почта",
@@ -34,11 +38,4 @@
   "registerHere": "Зарегистрируйтесь здесь",
   "termsAndPrivacy": "Вы соглашаетесь с нашими условиями и политикой конфиденциальности",
   "forgotPassword": "Забыли пароль?"
-=======
-  "welcome_message": "Путешествие начинается со страницы",
-  "developed_by": "Разработано Jhovani Holguín Rojas",
-  "version_info": "Версия: 1.0.0",
-  "date_info": "Дата: 23 апреля 2025",
-  "start_button": "Начать"
->>>>>>> d67b3c5 (Versión estable de pantalla de inicio de sesión - Diseño limpio y funcional - 050520251722)
 }
